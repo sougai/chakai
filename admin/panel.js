@@ -49,7 +49,7 @@ okyaku.dispatcher[authcommon.FETCH_ADDRESS] = function (msg, client) {
 	}
 
 	// Cache miss
-	ADDRS[key] = addr = {ip, key, shallow: true};
+	ADDRS[key] = addr = {ip: ip, key: key, shallow: true};
 	var r = connect();
 	r.hgetall('ip:'+key, function (err, info) {
 		if (err) {
