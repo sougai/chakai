@@ -208,5 +208,5 @@ if (typeof IDENT != 'undefined') {
 else {
 	exports.ip_mnemonic = ip_mnemonic;
 	exports.append_mnemonic = append_mnemonic;
-	exports.append_mnemonic = append_mnemonic_mod;
+	exports.append_mnemonic_mod = append_mnemonic_mod;
 }

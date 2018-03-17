@@ -339,8 +339,8 @@ function load_OPs(callback) {
 		});
 	}
 
-	var expiryKey = expiry_queue_key();
 	function refresh_expiry(tag, op, cb) {
+    var expiryKey = expiry_queue_key(tag);
 		if (tag == config.STAFF_BOARD)
 			return cb(null);
 		var entry = op + ':' + tag_key(tag);
@@ -358,18 +358,24 @@ function load_OPs(callback) {
 			}
 			if (thread.immortal)
 				return r.zrem(expiryKey, entry, cb);
-			var score = expiry_queue_score(thread.time);
+			var score = expiry_queue_score(thread.time, tag);
 			r.zadd(expiryKey, score, entry, cb);
 		});
 	}
 }
 
-function expiry_queue_score(time) {
-	return Math.floor(parse_number(time)/1000 + config.THREAD_EXPIRY);
+function expiry_queue_score(time, tag) {
+  if ((config.CURFEW_BOARDS || []).indexOf(tag) < 0)
+	  return Math.floor(parse_number(time)/1000 + config.THREAD_EXPIRY);
+  else
+	  return Math.floor(parse_number(time)/1000 + config.THREAD_EXPIRY_CURFEW);
 }
 
-function expiry_queue_key() {
-	return 'expiry:' + config.THREAD_EXPIRY;
+function expiry_queue_key(tag) {
+  if ((config.CURFEW_BOARDS || []).indexOf(tag) < 0)
+    return 'expiry:' + config.THREAD_EXPIRY;
+  else
+	  return 'expiry:' + config.THREAD_EXPIRY_CURFEW;
 }
 exports.expiry_queue_key = expiry_queue_key;
 
@@ -595,9 +601,9 @@ Y.insert_post = function (msg, body, extra, callback) {
 		// set conditional hide?
 		op = num;
 		if (!view.immortal) {
-			var score = expiry_queue_score(msg.time);
+			var score = expiry_queue_score(msg.time, this.tag);
 			var entry = num + ':' + tag_key(this.tag);
-			m.zadd(expiry_queue_key(), score, entry);
+			m.zadd(expiry_queue_key(this.tag), score, entry);
 		}
 		/* Rate-limit new threads */
 		if (ipUtils.isLoopback(ip))
@@ -773,8 +779,8 @@ Y.remove_thread = function (op, callback) {
 		var subject = subject_val(op, post.subject);
 		/* Rename thread keys, move to graveyard */
 		var m = r.multi();
-		var expiryKey = expiry_queue_key();
 		tags.forEach(function (tag) {
+		  var expiryKey = expiry_queue_key(tag);
 			var tagKey = tag_key(tag);
 			m.zrem(expiryKey, op + ':' + tagKey);
 			m.zrem('tag:' + tagKey + ':threads', op);

@@ -11,6 +11,8 @@ var RANGES = require('./state').dbCache.ranges;
 function can_access_board(ident, board) {
 	if (board == 'graveyard' && can_administrate(ident))
 		return true;
+	if (board == 'archive' && !can_administrate(ident))
+		return false;
 	if (board == config.STAFF_BOARD && !can_moderate(ident))
 		return false;
 	if (ident.ban || ident.suspension)
@@ -70,9 +72,10 @@ function dead_media_paths(paths) {
 exports.augment_oneesama = function (oneeSama, opts) {
 	var ident = opts.ident;
 	oneeSama.ident = ident;
-	if (can_moderate(ident))
-		oneeSama.hook('headerName', authcommon.append_mnemonic);
+	if (can_moderate(ident) && !can_administrate(ident))
+		oneeSama.hook('headerName', authcommon.append_mnemonic_mod);
 	if (can_administrate(ident)) {
+		oneeSama.hook('headerName', authcommon.append_mnemonic);
 		oneeSama.hook('headerName', denote_priv);
 		oneeSama.hook('headerName', authcommon.denote_hidden);
 	}

@@ -7,6 +7,7 @@ var _ = require('../lib/underscore'),
     winston = require('winston');
 
 var RES = require('../server/state').resources;
+var HOT = require('../server/state').hot;
 
 hooks.hook_sync('temporalAccessCheck', function (info) {
 	if (under_curfew(info.ident, info.board))
@@ -30,7 +31,7 @@ hooks.hook_sync('boardDiversion', function (info) {
 });
 
 function under_curfew(ident, board) {
-	if (caps.can_administrate(ident))
+	if (caps.can_administrate(ident) || HOT.CURFEW_LIFTED)
 		return false;
 	var curfew = config.CURFEW_HOURS;
 	if (!curfew || (config.CURFEW_BOARDS || []).indexOf(board) < 0)

@@ -47,7 +47,7 @@ var CLEANING_LIMIT = 10; // per minute
 
 function clean_up() {
 	var r = connect();
-	var expiryKey = db.expiry_queue_key();
+	var expiryKey = db.expiry_queue_key('non_curfew');
 	var now = Math.floor(Date.now() / 1000);
 	r.zrangebyscore(expiryKey, 1, now, 'limit', 0, CLEANING_LIMIT,
 				function (err, expired) {
@@ -75,6 +75,36 @@ function clean_up() {
 			});
 		});
 	});
+  // Cleanup curfew boards too
+  if (config.CURFEW_BOARDS.length > 0) {
+	  var expiryKeyCurfew = db.expiry_queue_key(config.CURFEW_BOARDS[0]);
+	  r.zrangebyscore(expiryKeyCurfew, 1, now, 'limit', 0, CLEANING_LIMIT,
+				function (err, expired) {
+		  if (err) {
+			  winston.error(err);
+			  return;
+		  }
+		  expired.forEach(function (entry) {
+			  var m = entry.match(/^(\d+):/);
+			  if (!m)
+				  return;
+			  var op = parseInt(m[1], 10);
+			  if (!op)
+				  return;
+		    yaku.archive_thread(op, function (err) {
+				  if (err)
+					  return winston.error(err);
+				  r.zrem(expiryKeyCurfew, entry, function (err, n) {
+					  if (err)
+						  return winston.error(err)
+					  winston.info("Archived thread #" + op);
+					  if (n != 1)
+						  winston.warn("Not archived?");
+				  });
+			  });
+		  });
+	  });
+  }
 	at_next_minute(clean_up);
 }
 
