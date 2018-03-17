@@ -1,7 +1,7 @@
 var CurThread;
 
 var $DOC = $(document);
-var $name = $('#xD'), $email = $('#pogchamp');
+var $name = $('#name'), $email = $('#email');
 var $ceiling = $('hr:first');
 
 DEFINES.PAGE_BOTTOM = -1;
