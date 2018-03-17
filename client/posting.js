@@ -293,7 +293,8 @@ initialize: function (dest) {
 	this.options.dest.replaceWith(post);
 
 	this.$input.input(this.on_input.bind(this, undefined));
-	this.$input.blur(this.on_blur.bind(this));
+  if (config.CURSOR_ENABLED)
+	  this.$input.blur(this.on_blur.bind(this));
 
 	if (op) {
 		this.resize_input();

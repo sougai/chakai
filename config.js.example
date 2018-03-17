@@ -37,6 +37,8 @@ var config = {
 	SUBJECT_MAX_LENGTH: 50,
 	EXCLUDE_REGEXP: /[\u2000-\u200f\u202a-\u202f\u205f-\u206f]+/g,
 	SAGE_ENABLED: true,
+  TRIPCODE_ENABLED: true,
+  CURSOR_ENABLED: true,
 
 	ADMIN_GITHUBS: ['lalcmellkmal'],
 	MODERATOR_GITHUBS: [],
