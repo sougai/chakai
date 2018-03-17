@@ -749,11 +749,9 @@ OS.post_url = function (num, op, quote) {
 	return (this.op == op ? '' : op) + (quote ? '#q' : '#') + num;
 };
 
-OS.post_ref = function (num, op, desc_html) {
+OS.post_ref = function (num, op) {
 	var ref = '&gt;&gt;' + num;
-	if (desc_html)
-		ref += ' ' + desc_html;
-	else if (this.op && this.op != op)
+	if (this.op && this.op != op)
 		ref += ' \u2192';
 	else if (num == op && this.op == op)
 		ref += ' (OP)';

@@ -17,15 +17,9 @@ var TAB_ID = random_id();
 var CONN_ID;
 
 var oneeSama = new OneeSama(function (num) {
-	var frag;
-	if (this.links && num in this.links) {
-		var op = this.links[num];
-		var post = Threads.lookup(num, op);
-		var desc = post && post.get('mine') && '(You)';
-		frag = this.post_ref(num, op, desc);
-	}
+	if (this.links && num in this.links)
+		this.callback(this.post_ref(num, this.links[num]));
 	else
-		frag = '>>' + num;
-	this.callback(frag);
+		this.callback('>>' + num);
 });
 oneeSama.full = oneeSama.op = THREAD;
