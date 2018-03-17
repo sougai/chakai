@@ -628,6 +628,7 @@ var audioIndicator = "\u266B"; // musical note
 
 OS.gazou = function (info, toppu) {
 	var src, name, caption, video;
+  var spoiltgl = (this.spoilToggle == true);
 	if (info.vint) {
 		src = encodeURI('../outbound/hash/' + info.MD5);
 		var google = encodeURI('../outbound/g/' + info.vint);
@@ -639,7 +640,8 @@ OS.gazou = function (info, toppu) {
 	else {
 		src = encodeURI(this.image_paths().src + info.src);
 		video = info.video || (/\.webm$/i.test(src) && 'webm'); // webm check is legacy
-		caption = [video ? 'Video ' : 'Image ', new_tab_link(src, info.src)];
+		caption = [video ? 'Video ' : 'Image ',
+            new_tab_link(src, (spoiltgl && (info.spoiler || info.realthumb)) ? 'Spoilered Image' : info.src)];
 	}
 
 	var img = this.gazou_img(info, toppu);
@@ -654,7 +656,7 @@ OS.gazou = function (info, toppu) {
 		info.duration ? (info.duration + ', ') : '',
 		readable_filesize(info.size), ', ',
 		dims, (info.apng ? ', APNG' : ''),
-		this.full ? [', ', chibi(info.imgnm, img.src)] : '',
+		', ', chibi(info.imgnm, img.src),
 		safe(')</i></figcaption>'),
 		this.thumbStyle == 'hide' ? '' : img.html,
 		safe('</figure>\n\t')];
@@ -665,12 +667,13 @@ exports.thumbStyles = ['small', 'sharp', 'large', 'hide'];
 OS.gazou_img = function (info, toppu) {
 	var src, thumb;
 	var imgPaths = this.image_paths();
+  var spoiltgl = (this.spoilToggle == true);
 	if (!info.vint)
 		src = thumb = encodeURI(imgPaths.src + info.src);
 
 	var d = info.dims;
 	var w = d[0], h = d[1], tw = d[2], th = d[3];
-	if (info.spoiler) {
+	if (info.spoiler && !spoiltgl) {
 		var sp = this.spoiler_info(info.spoiler, toppu);
 		thumb = sp.thumb;
 		tw = sp.dims[0];
@@ -689,6 +692,15 @@ OS.gazou_img = function (info, toppu) {
 			th *= 2;
 		}
 	}
+  else if (spoiltgl && info.realthumb) {
+    thumb = encodeURI(imgPaths.thumb + info.realthumb);
+    if (w > h) {
+      th = Math.round(tw/w*h);
+    }
+    else {
+      tw = Math.round(th/h*w);
+    }
+  }
 	else if (info.thumb)
 		thumb = encodeURI(imgPaths.thumb + info.thumb);
 	else {

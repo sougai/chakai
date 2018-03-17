@@ -28,6 +28,9 @@ exports.write_thread_html = function (reader, req, out, opts) {
 	if (common.thumbStyles.indexOf(cookies.thumb) >= 0)
 		oneeSama.thumbStyle = cookies.thumb;
 
+  if (cookies.spoiler_toggle == 'true')
+    oneeSama.spoilToggle = (cookies.spoiler_toggle == 'true');
+
 	var lastN = cookies.lastn && parseInt(cookies.lastn, 10);
 	if (!lastN || !common.reasonable_last_n(lastN))
 		lastN = config.THREAD_LAST_N;

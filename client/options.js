@@ -38,6 +38,7 @@ if (window.devicePixelRatio > 1)
 optSpecs.push(option_thumbs);
 optSpecs.push(option_autocomplete);
 optSpecs.push(option_backlinks);
+optSpecs.push(option_spoiler_toggle);
 optSpecs.push(option_theme);
 optSpecs.push(option_last_n);
 
@@ -254,6 +255,15 @@ var load_thread_backlinks = function ($section) {
 	});
 };
 
+/* SPOILER TOGGLE */
+function option_spoiler_toggle(spoiltgl) {
+  $.cookie('spoiler_toggle', spoiltgl);
+  oneeSama.spoilToggle = spoiltgl;
+}
+option_spoiler_toggle.id = 'nospoiltgl';
+option_spoiler_toggle.label = 'Spoilered Images';
+option_spoiler_toggle.type = 'revcheckbox';
+
 /* INLINE EXPANSION */
 
 function option_inline_expansion() {
@@ -262,8 +272,8 @@ function option_inline_expansion() {
 option_inline_expansion.id = 'inlinefit';
 option_inline_expansion.label = 'Expansion';
 option_inline_expansion.type = ['none', 'full', 'width', 'height', 'both'];
-option_inline_expansion.labels = ['no', 'full-size', 'fit to width',
-		'fit to height', 'fit to both'];
+option_inline_expansion.labels = ['none', 'full size', 'fit width',
+		'fit height', 'fit both'];
 
 function option_high_res() {
 }
