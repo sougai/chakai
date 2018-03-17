@@ -6,11 +6,11 @@ var Unread = new Backbone.Model({unreadCount: 0});
 var normalTitle = document.title;
 
 window.addEventListener('focus', function () {
-	Unread.set({blurred: false, unreadCount: 0, reply: false});
+	Unread.set({blurred: false, unreadCount: 0});
 }, false);
 
 window.addEventListener('blur', function () {
-	Unread.set({blurred: true, unreadCount: 0, reply: false});
+	Unread.set({blurred: true, unreadCount: 0});
 }, false);
 
 connSM.on('synced', function () {
@@ -22,10 +22,6 @@ function dropped() {
 }
 connSM.on('dropped', dropped);
 connSM.on('desynced', dropped);
-
-Backbone.on('repliedToMe', function () {
-	Unread.set({reply: true});
-});
 
 Backbone.on('afterInsert', function (model) {
 	if (model && model.get('mine'))
@@ -40,17 +36,11 @@ Unread.on('change', function (model) {
 		document.title = normalTitle;
 		return;
 	}
-	if (attrs.alert) {
-		document.title = '--- ' + normalTitle;
-		return;
-	}
-
 	var prefix = '';
-	if (attrs.reply)
-		prefix += '>> ';
-	if (attrs.unreadCount)
-		prefix += '(' + attrs.unreadCount + ') ';
-
+	if (attrs.alert)
+		prefix = '--- ';
+	else if (attrs.unreadCount)
+		prefix = '(' + attrs.unreadCount + ') ';
 	document.title = prefix + normalTitle;
 });
 
