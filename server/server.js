@@ -740,7 +740,6 @@ var insertSpec = [{
 	email: 'opt string',
 	auth: 'opt string',
 	subject: 'opt string',
-	flavor: 'opt string',
 }];
 
 dispatcher[common.INSERT_POST] = function (msg, client) {
@@ -831,10 +830,6 @@ function allocate_post(msg, client, callback) {
 		post.email = msg.email.trim().substr(0, 320);
 		if (common.is_noko(post.email))
 			delete post.email;
-	}
-	if (msg.flavor && /^\w+$/.test(msg.flavor)) {
-		if (msg.flavor == 'floop')
-			post.flavor = 'floop';
 	}
 	post.state = common.initial_state();
 

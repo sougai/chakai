@@ -124,10 +124,6 @@ function handle_shortcut(event) {
 			}
 		}
 		break;
-	case shortcutKeys.flip:
-		menuHandlers.Flip();
-		used = true;
-		break;
 	}
 
 	if (used) {
@@ -238,11 +234,10 @@ initialize: function (dest) {
 
 	this.listenTo(this.model, 'change', this.render_buttons);
 	this.listenTo(this.model, 'change:spoiler', this.render_spoiler_pane);
-	this.listenTo(this.model, 'change:floop', this.render_floop);
 
 	var attrs = this.model.attributes;
 	var op = attrs.op;
-	var post = op ? $('<article class="mine"/>') : this.options.thread;
+	var post = op ? $('<article/>') : this.options.thread;
 	this.setElement(post[0]);
 
 	this.buffer = $('<p/>');
@@ -311,7 +306,6 @@ initialize: function (dest) {
 	$('aside').remove();
 
 	preload_panes();
-	this.model.set('floop', window.lastFloop);
 },
 
 propagate_ident: function () {
@@ -357,8 +351,6 @@ on_allocation: function (msg) {
 
 	if (msg.image)
 		this.insert_uploaded(msg.image);
-	if (num == MILLION)
-		this.add_own_gravitas(msg);
 
 	if (this.uploadForm)
 		this.uploadForm.append(this.submit);
@@ -717,8 +709,6 @@ make_alloc_request: function (text, image) {
 	opt('frag', text);
 	opt('image', image);
 	opt('op', this.model.get('op'));
-	if (this.model.get('floop'))
-		msg.flavor = 'floop';
 	return msg;
 },
 
@@ -812,7 +802,6 @@ finish: function () {
 		this.preserve = true;
 	}
 	postSM.feed('done');
-	this.$el.removeClass('mine');
 },
 
 remove: function () {
@@ -953,26 +942,7 @@ render_spoiler_pane: function (model, sp) {
 	this.$toggle.css('background-image', 'url("' + img + '")');
 },
 
-render_floop: function (model, floop) {
-	this.$el.toggleClass('floop', floop);
-},
-
 });
-
-menuHandlers.Flip = function () {
-	var floop = !window.lastFloop;
-	window.lastFloop = floop;
-	if (floop)
-		$('<style/>', {
-			id: 'floop-aside-right',
-			text: 'section.full.floop aside { margin: -26px 0 2px auto; }',
-		}).appendTo('head');
-	else
-		$('#floop-aside-right').remove();
-
-	if (postForm && !postForm.committed())
-		postForm.model.set('floop', floop);
-};
 
 menuHandlers.Vapor = function () {
 	vapor = -1;
@@ -982,16 +952,6 @@ menuHandlers.Vapor = function () {
 };
 
 oneeSama.hook('menuOptions', function (info) {
-	if (!info.model && info.mine && !postForm.committed()) {
-		var $sec = info.$button.closest('section.floop');
-		if ($sec.length || !THREAD) {
-			var i = info.options.indexOf('Focus');
-			if (i >= 0)
-				info.options.splice(i, 1);
-			info.options.unshift('Flip');
-		}
-	}
-
 	if (info.mine) {
 		var active = vapor < 0 || wombo < 0;
 		info.options.push(active ? 'Eject' : 'Vapor');

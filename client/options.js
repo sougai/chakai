@@ -38,7 +38,6 @@ if (window.devicePixelRatio > 1)
 optSpecs.push(option_thumbs);
 optSpecs.push(option_autocomplete);
 optSpecs.push(option_backlinks);
-optSpecs.push(option_reply_at_right);
 optSpecs.push(option_theme);
 optSpecs.push(option_last_n);
 
@@ -193,21 +192,6 @@ function reveal_thumbnail(event) {
 	});
 	return false;
 }
-
-/* REPLY AT RIGHT */
-
-function option_reply_at_right(r) {
-	if (r)
-		$('<style/>', {
-			id: 'reply-at-right',
-			text: 'aside { margin: -26px 0 2px auto; }',
-		}).appendTo('head');
-	else
-		$('#reply-at-right').remove();
-}
-option_reply_at_right.id = 'replyright';
-option_reply_at_right.label = '[Reply] at right';
-option_reply_at_right.type = 'checkbox';
 
 /* AUTOCOMPLETE */
 
@@ -414,23 +398,8 @@ function fit_to_window($img, w, h, widthFlag, heightFlag) {
 				expand_full_width($img, $post, rect);
 				heightFlag = false;
 			}
-			else {
+			else
 				overX = rect.right - innerWidth;
-
-				// right-side posts might fall off the left side of the page
-				// account for them + left margin
-				if (rect.left < 0) {
-					// there has to be a better way...
-					function m($el) {
-						var m = parseInt($el.css('marginLeft'), 10);
-						var p = parseInt($el.css('paddingLeft'), 10);
-						return (m || 0) + (p || 0);
-					}
-					var $sec = $post.closest('section');
-					var margin = m($('body')) + m($post) + m($sec) + 13;
-					overX -= rect.left - margin;
-				}
-			}
 		}
 		else if ($post.is('section'))
 			overX = w - (innerWidth - rect.left*2);
@@ -459,10 +428,6 @@ function fit_to_window($img, w, h, widthFlag, heightFlag) {
 }
 
 function expand_full_width($img, $post, rect) {
-	if ($post.hasClass('floop')) {
-		$post.removeClass('floop');
-		$post.data('crouching-floop', true);
-	}
 	var img = $img[0].getBoundingClientRect();
 	$img.css('margin-left', -img.left + 'px');
 	var over = rect.right - img.right;
@@ -483,10 +448,6 @@ function contract_full_width($post) {
 			'border-right': '',
 		});
 	}
-	if ($post.data('crouching-floop')) {
-		$post.addClass('floop');
-		$post.removeData('crouching-floop');
-	}
 }
 
 /* SHORTCUT KEYS */
@@ -495,7 +456,6 @@ var shortcuts = [
 	{label: 'New post', name: 'new', which: 78},
 	{label: 'Image spoiler', name: 'togglespoiler', which: 73},
 	{label: 'Finish post', name: 'done', which: 83},
-	{label: 'Flip side', name: 'flip', which: 70},
 ];
 
 function toggle_shortcuts(event) {
