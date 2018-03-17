@@ -118,6 +118,17 @@ function append_mnemonic(info) {
 			mnemonic || ip, s('</a>'));
 }
 
+function append_mnemonic_mod(info) {
+	var header = info.header, ip = info.data.ip;
+	if (!ip)
+		return;
+	var mnemonic = config.IP_MNEMONIC && ip_mnemonic(ip);
+
+	var s = common.safe;
+	header.push(s(' <a class="mod addr">'),
+			mnemonic, s('</a>'));
+}
+
 function denote_hidden(info) {
 	if (info.data.hide)
 		info.header.push(common.safe(
@@ -185,10 +196,17 @@ exports.ip_key = ip_key;
 if (typeof IDENT != 'undefined') {
 	/* client */
 	window.ip_mnemonic = ip_mnemonic;
-	oneeSama.hook('headerName', append_mnemonic);
-	oneeSama.hook('headerName', denote_hidden);
+  if (IDENT.auth == 'Admin') {
+	  oneeSama.hook('headerName', append_mnemonic);
+	  oneeSama.hook('headerName', denote_hidden);
+  }
+  else if (IDENT.auth == 'Moderator') {
+	  oneeSama.hook('headerName', append_mnemonic_mod);
+	  oneeSama.hook('headerName', denote_hidden);
+  }
 }
 else {
 	exports.ip_mnemonic = ip_mnemonic;
 	exports.append_mnemonic = append_mnemonic;
+	exports.append_mnemonic = append_mnemonic_mod;
 }

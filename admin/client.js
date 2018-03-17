@@ -9,10 +9,11 @@ window.x_csrf = IDENT.csrf;
 
 function show_toolbox() {
 	var specs = [
-		{name: 'Lewd', kind: 7},
-		{name: 'Porn', kind: 8},
-		{name: 'Delete', kind: 9},
+		{name: 'Spoiler', kind: 7},
+		{name: 'Del Img', kind: 8},
+		{name: 'Del Post', kind: 9},
 		{name: 'Lock', kind: 11},
+    {name: 'Mnemonics', kind: 'mnemonics'},
 	];
 	if (IDENT.auth == 'Admin')
 		specs.push({name: 'Panel', kind: 'panel'});
@@ -60,6 +61,8 @@ function tool_action(event) {
 	var kind = $button.data('kind');
 	if (kind == 'panel')
 		return toggle_panel();
+  if (kind == 'mnemonics')
+    return options.set('noMnemonics', !options.get('noMnemonics'));
 
 	/* On a thread page there's only one thread to lock, so... */
 	if (kind == 11 && THREAD && !ids.length)
@@ -82,7 +85,7 @@ function tool_action(event) {
 
 readOnly.push('graveyard');
 menuOptions.unshift('Select');
-menuHandlers.Hide = function () { alert('nope.avi'); };
+menuHandlers.Hide = function () { alert('Moderation cannot hide posts.'); };
 
 var multiSelecting = false;
 
@@ -188,33 +191,41 @@ var AddressView = Backbone.View.extend({
 
 	initialize: function () {
 		var $el = this.$el;
-		$('<span/>', {"class": 'ip'}).appendTo($el);
-		$el.append(' &nbsp; ', $('<input/>', {
-			"class": 'sel-all',
-			type: 'button',
-			val: 'Sel All'
-		}));
-		if (IDENT.auth == 'Admin')
+    if (IDENT.auth == 'Admin') {
+		  $('<span/>', {"class": 'ip'}).appendTo($el);
+		  $el.append(' &nbsp; ', $('<input/>', {
+			  "class": 'sel-all',
+			  type: 'button',
+			  val: 'Sel All'
+		  }));
 			$el.append($('<input/>', {
 				"class": 'ban',
 				type: 'button',
 				val: 'Ban'
 			}));
-
-		$el.append(
-			'<br>',
-			$('<input>', {"class": 'name', placeholder: 'Name'})
-		);
+		  $el.append(
+			  '<br>',
+			  $('<input>', {"class": 'name', placeholder: 'Name'})
+		  );
+    }
+    else {
+		  $el.append(
+			  '<br>',
+			  $('<input>', {"class": 'name', placeholder: 'Name'})
+		  );
+    }
 		this.listenTo(this.model, 'change', this.render);
 	},
 
 	render: function () {
 		var attrs = this.model.attributes;
-		if (attrs.shallow) {
-			this.$('.ip').text(attrs.ip ? attrs.ip + ' "\u2026"' : 'Loading...');
-			return this;
-		}
-		this.$('.ip').text(attrs.ip);
+    if (IDENT.auth == 'Admin') {
+		  if (attrs.shallow) {
+			  this.$('.ip').text(attrs.ip ? attrs.ip + ' "\u2026"' : 'Loading...');
+			  return this;
+		  }
+		  this.$('.ip').text(attrs.ip);
+    }
 		var $name = this.$('.name');
 		if (!this.focusedName) {
 			_.defer(function () {
@@ -296,8 +307,10 @@ var AddrView = Backbone.View.extend({
 	},
 
 	initialize: function () {
-		this.$el.attr('href', '#');
-		this.listenTo(this.model, 'change:name', this.render);
+    if (IDENT.auth == 'Admin') {
+      this.$el.attr('href', '#');
+		  this.listenTo(this.model, 'change:name', this.render);
+    }
 	},
 
 	render: function () {
@@ -465,6 +478,13 @@ function toggle_panel() {
 	var show = !adminState.get('visible');
 	send([show ? 60 : 61, 'adminState']);
 }
+
+// Toggle mnemonic display
+$('head').append('<style id="noMnemonics">b>.mod.addr{display:none;}</style>');
+$('#noMnemonics').prop('disabled', !options.get('noMnemonics'));
+options.on('change:noMnemonics', function(model, noMnemonics){
+  $('#noMnemonics').prop('disabled', !noMnemonics);
+});
 
 if (IDENT.auth == 'Admin') (function () {
 	var $panel = $('<div/>', {id: 'panel', "class": 'mod modal'}).hide();
