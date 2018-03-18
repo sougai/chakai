@@ -1,0 +1,187 @@
+a, blockquote a {
+	color: #00cc00;
+}
+a:hover, .email b:hover {
+	color: #00ff00;
+}
+a.directfl {
+  text-decoration: none;
+	color: #00cc00;
+}
+article {
+	background-color: #080808;
+	border-top: 2px solid #00aa00;
+	border-right: 2px solid #00aa00;
+	border-bottom: 2px solid #00aa00;
+  /*margin-bottom: -1px;*/
+  /*padding-bottom: 1px;*/
+  margin-top: -4px;
+  padding-top: 1px;
+}
+aside, .pagination {
+	background-color: #080808;
+	border-top: 2px solid #00aa00;
+	border-left: 2px solid #00aa00;
+	border-right: 2px solid #00aa00;
+	border-bottom: 2px solid #00aa00;
+}
+aside {
+  margin-top: -4px;
+}
+article.highlight {
+	background-color: #082008;
+	border-color: #00aa00;
+}
+article.editing {
+	background-color: #181c18;
+	border-color: #00aa00;
+}
+b {
+	color: #00cc00;
+}
+b.admin {
+	color: #b98000;
+}
+b.moderator {
+	color: #b98000;
+}
+body {
+  color: #00cc00;
+	background-color: #080808;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-attachment: fixed;
+  background-position: right bottom;
+	font-family: "Courier New", Courier, monospace;
+	font-size: 10pt;
+}
+pre, .themed {
+  color: #00ee00;
+	font-family: "Courier New", Courier, monospace;
+	font-size: 10pt;
+}
+em {
+	color: #b98000;
+}
+h1 {
+	color: #00cc00;
+	font-family: "Courier New", Courier, monospace;
+	font-size: 30px;
+	text-shadow: #006600 1px 1px 0px;
+	letter-spacing: 1px;
+}
+h2 {
+	color: #00cc00;
+	font-family: Tahoma;
+}
+h3 {
+	color: #00cc00;
+}
+header nav a {
+	color: #00cc00;
+}
+hr {
+	border-top: 2px solid #00cc00;
+}
+.popup-menu li:hover {
+	background-color: #333333;
+}
+.act:before {
+	content: "[";
+}
+.act:after {
+	content: "]";
+}
+.email, .email b {
+	color: #00aa00;
+}
+
+.embed {
+  background-color: #00bb00;
+  color: #080808;
+}
+.modal, .popup-menu, .preview {
+	background-color: #080808;
+	border-top: 2px solid #006600;
+	border-left: 2px solid #006600;
+	border-right: 2px solid #006600;
+	border-bottom: 2px solid #006600;
+}
+.popup-menu {
+  top: -9px;
+  left: -11px;
+}
+.omit {
+	color: #009900;
+}
+#lock, .scroll-lock header {
+  color: #00cc00;
+	background-image: url('ui/invglock.svg');
+  background-size: 14px 15px;
+	background-position: 0px 0px;
+}
+.themed {
+	color: #00ee00;
+}
+del {
+  background: #00aa00;
+  color: #00aa00;
+}
+#sync, #options {
+color: #00cc00
+}
+input[type=button] {
+  padding: 4px;
+  background: #080808;
+  color: #00cc00;
+  border: 1px solid #00aa00;
+  font-family: "Courier New", Courier, monospace;
+  cursor: pointer;
+}
+.fileInput {
+  display: inline;
+  position: relative;
+  padding: 4px;
+  background: #080808;
+  color: #00cc00;
+  border: 1px solid #00aa00;
+  font-family: "Courier New", Courier, monospace;
+  cursor: pointer;
+  margin-left: 0px;
+  margin-right: 130px;
+}
+.postCancel {
+  margin-right: 2px;
+}
+input[type=file] {
+  display: none;
+  position: relative;
+  z-index: 2;
+  background: #080808;
+  color: #00cc00;
+  font-family: "Courier New", Courier, monospace;
+  width: 1px;
+  cursor: pointer;
+  opacity: 0;
+}
+
+#name, #email, #lastn {
+  font-family: "Courier New", Courier, monospace;
+  background: #0f0f0f;
+  color: #00cc00;
+  padding: 2px;
+  border: 1px solid #00aa00;
+}
+#email, #lastn {
+  margin-top: 2px;
+}
+#lastn {
+  margin-bottom: 2px;
+}
+
+
+@media all and (max-device-width: 600px) {
+  body {
+    background-attachment: scroll;
+  }
+}

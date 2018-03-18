@@ -698,6 +698,8 @@ insert_uploaded: function (info) {
 	insert_image(info, form.siblings('header'), !op);
 	this.$imageInput.siblings('strong').andSelf().add(this.$cancel
 			).remove();
+  this.$imageButton.siblings('strong').andSelf().add(this.$cancel
+      ).remove();
 	form.find('#toggle').remove();
 	this.flush_pending();
 	this.model.set({uploading: false, uploaded: true,
@@ -848,6 +850,7 @@ render_buttons: function () {
 		self.$cancel.prop('disabled', !!allocWait);
 		self.$cancel.toggle(!!(!attrs.num || attrs.uploading));
 		self.$imageInput.prop('disabled', !!attrs.uploading);
+		self.$imageButton.prop('disabled', !!attrs.uploading);
 		self.$uploadStatus.text(attrs.uploadStatus);
 	});
 },
@@ -868,7 +871,7 @@ make_upload_form: function () {
 	var form = $('<form method="post" enctype="multipart/form-data" '
 		+ 'target="upload"></form>');
 	this.$cancel = $('<input>', {
-		type: 'button', value: 'Cancel',
+		type: 'button', value: 'Cancel', class: 'postCancel',
 		click: $.proxy(this, 'cancel'),
 	});
 	var opts = {
@@ -878,17 +881,22 @@ make_upload_form: function () {
 	if (!imagerConfig.VIDEO)
 		opts.accept = 'image/*';
 	this.$imageInput = $('<input>', opts);
+	this.$imageButton = $('<input>', {
+    type: 'button', class: 'fileInput', value: 'Choose File',
+    onclick: 'document.getElementById("image").click()',
+  });
 	this.$toggle = $('<input>', {
 		type: 'button', id: 'toggle',
 	});
 	this.$uploadStatus = $('<strong/>');
-	form.append(this.$cancel, this.$imageInput, this.$toggle, ' ',
+	form.append(this.$cancel, this.$imageInput, this.$imageButton, this.$toggle, ' ',
 			this.$uploadStatus);
 	this.$iframe = $('<iframe></iframe>', {
 		src: '', name: 'upload', id: 'hidden-upload',
 	}).appendTo('body');
 	if (nashi.upload) {
 		this.$imageInput.hide();
+		this.$imageButton.hide();
 		this.$toggle.hide();
 	}
 	this.model.set({spoiler: 0, nextSpoiler: -1});
