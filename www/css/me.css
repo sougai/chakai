@@ -1,0 +1,215 @@
+/*  this css is a mess
+    Saya may tune the colors and choose a bette font
+    And fix the image links
+*/
+
+del {
+  color: transparent;
+  background-color: transparent;
+  text-shadow: 0 0 10px #000000;
+  transition-duration: 0.2s;
+  transition-property: color, text-shadow;
+}
+del:hover, del.reveal {
+  color: inherit;
+  text-shadow: none;
+}
+#options, #sync {
+  color: #ffffff;
+}
+#options {
+  text-decoration: underline;
+}
+a {
+  color: #ffffff;
+  text-decoration: none;
+} 
+article * a, aside a, #options-panel a, div.preview * a, .pagination a {
+  color: #0000ff;
+}
+a:hover, .email:hover, .email b:hover {
+  color: #002060;
+}
+.act a:hover , .adminbar a:hover, figcaption a:hover {
+  background-color: #ffffff;
+}
+article header a:hover, article .email b:hover {
+  background-color: transparent;
+}
+article * a:hover, aside.act a:hover, aside a:hover, div.preview * a:hover, .pagination a:hover{
+  background-color: #002060;
+  color: #ffffff;
+}
+article header nav a:hover, article.highlight header nav a:hover, article.editing header nav a:hover {
+  color: #0000ff;
+  background-color: transparent;
+}
+a.embed:hover {
+  background-color: rgba(255,255,255,0.5);;
+}
+a.directfl {
+  text-decoration: none;
+  color: #000000;
+}
+article, aside, .pagination, div.preview {
+  padding: 1px 10px 4px 10px;
+  color: #000000;
+  background-color: #d0cfc0;
+  border-top: 1px solid #ffffff;
+  border-left: 1px solid #ffffff;
+  border-right: 2px ridge #3f3f3f;
+  border-bottom: 2px ridge #3f3f3f;
+}
+article.highlight header, article.editing header {
+  margin-left: -9px;
+  margin-right: -9px;
+  padding-right: 9px;
+  color: #ffffff;
+  background: linear-gradient(to right, #0000ff, #000000);
+}
+article.highlight header nav a, article.editing header nav a, div.preview header nav a {
+  color: #ffffff;
+}
+article.highlight header .email, article.highlight header .email b, article.editing header .email, article.editing header .email b {
+  color: #66cc33;
+}
+article header, div.preview header {
+  margin-left: -9px;
+  margin-right: -9px;
+  padding-right: 9px;
+  padding-bottom: 2px;
+  color: #ffffff;
+  background: linear-gradient(to right, #002060, #a0c8ef);
+}
+header b {
+  color: #ffffff;
+  font-weight: normal;
+}
+header nav a {
+  color: #ffffff;
+}
+article header nav a {
+  color: #ffffff;
+}
+div.preview figcaption i a {
+  color: #000000;
+  text-decoration: none;
+}
+div.preview b {
+  color: #ffffff;
+}
+div.preview b.admin {
+  color: #d2aac0;
+}
+div.preview b.moderator {
+  color: #c897d4;
+}
+div.preview .email, div.preview .email b {
+  color: #66cc33;
+}
+article.highlight header {
+  /*background-color: #ffffff;*/
+  background: linear-gradient(to right, #0000ff, #a0c8ef);
+}
+article header b {
+  color: #ffffff;
+}
+article.highlight b, article.editing b {
+  color: #ffffff;
+}
+article.highlight .email:hover, article.highlight .email b:hover, article.editing .email:hover, article.editing .email b:hover {
+  background-color: #ffffff;
+  color: #002060;
+}
+div.preview .act a {
+  color: #ffffff;
+}
+b.admin {
+  color: #d2aac0;
+}
+b.moderator {
+  color: #c897d4;
+}
+body {
+  background-image: url('mekan.png');
+  background-repeat: no-repeat;
+  background-size: 300px;
+  background-attachment: fixed;
+  background-position: right bottom;
+  color: #ffffff;
+  background-color: #396da6;
+  font-family: "Microsoft Sans Serif", Arial, sans-serif;
+  font-size: 10pt;
+}
+pre, .themed {
+  color: #59543f;
+  font-family: "Microsoft Sans Serif", Arial, sans-serif;
+  font-size: 10pt;
+}
+em {
+  /*color: #61a870;*/
+  color: #006400;
+}
+h1 {
+  /*color: #78ee96;*/
+  color: #66cc33;
+  font-family: "Microsoft Sans Serif", Arial, sans-serif;
+  font-size: 30px;
+  text-shadow: #60c82f 1px 1px 5px;
+  letter-spacing: 1px;
+}
+h2 {
+  color: #b32407;
+  font-family: "Microsoft Sans Serif", Arial, sans-serif;
+  text-shadow: #8e3523 1px 1px 0px;
+}
+h3 {
+  /*color: #78ee96;*/
+  color: #66cc33;
+}
+hr {
+  border-top: 1px solid #ffffff;
+}
+/* if you're reading this please give ME a hug */
+.popup-menu li:hover {
+  background-color: #002060;
+  color: #ffffff;
+}
+.act:before {
+  content: "[";
+}
+.act:after {
+  content: "]";
+}
+.email, .email b {
+  color: #66cc33;
+}
+.modal, .preview, .popup-menu {
+  color: #000000;
+  background-color: #d0cfc0;
+  border-top: 1px solid #ffffff;
+  border-left: 1px solid #ffffff;
+  border-right: 2px ridge #3f3f3f;
+  border-bottom: 2px ridge #3f3f3f;
+}
+popup-menu li {
+  padding: 1px 2px 1px 14px;
+}
+.omit {
+  color: #d0cfc0;
+}
+.control {
+  height: 100%;
+  width: 13px;
+  background: url('ui/box.png') 3px 3px no-repeat;
+}
+#lock {
+  color: #ffffff;
+}
+
+@media all and (max-device-width: 600px) {
+  body {
+    background-attachment: scroll;
+    background-size: 200px;
+  }
+}

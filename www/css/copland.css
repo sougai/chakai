@@ -1,0 +1,195 @@
+a, blockquote a {
+	color: #18cae6;
+}
+a:hover, .email b:hover {
+	color: #e56f47;
+}
+a.directfl {
+  text-decoration: none;
+	color: #18cae6;
+}
+article {
+	background-color: #080808;
+	background-color: rgba(8,8,8,.90);
+	border-top: 2px solid #18cae6;
+	border-left: 2px solid #18cae6;
+	border-right: 2px solid #18cae6;
+	border-bottom: 2px solid #18cae6;
+  /*margin-bottom: -1px;*/
+  /*padding-bottom: 1px;*/
+  margin-top: -4px;
+  padding-top: 1px;
+}
+aside, .pagination {
+	background-color: #080808;
+	background-color: rgba(8,8,8,.90);
+	border-top: 2px solid #18cae6;
+	border-left: 2px solid #18cae6;
+	border-right: 2px solid #18cae6;
+	border-bottom: 2px solid #18cae6;
+}
+aside {
+  margin-top: -4px;
+}
+article.highlight {
+	background-color: #030d33;
+	background-color: rgba(13,24,64,.95);
+	border-color: #18cae6;
+}
+article.editing {
+	background-color: #0a1d26;
+	background-color: rgba(14,41,54,.95);
+	border-color: #18cae6;
+}
+b {
+  font-weight: normal;
+  color: #18cae6;
+}
+b.admin {
+	color: #e56f47;
+}
+b.moderator {
+	color: #e56f47;
+}
+body {
+  color: #18cae6;
+  background-color: #030e14;
+  background-image: url('copland.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center center;
+	font-family: Menlo, Courier, monospace;
+	font-size: 10pt;
+}
+pre, .themed {
+  color: #1ad7f5;
+	font-family: Menlo, Courier, monospace;
+	font-size: 10pt;
+}
+em {
+	color: #573cfd;
+	color: #7f18e6;
+}
+h1 {
+	color: #b1dff6;
+	font-family: Garamond, "Times New Roman", serif;
+	font-size: 32px;
+	text-shadow: #93b7cf 1px 1px 0px;
+	letter-spacing: 2px;
+}
+h2 {
+  color: #18cae6;
+	font-family: Tahoma;
+}
+h3 {
+  color: #18cae6;
+}
+header nav a {
+  color: #18cae6;
+}
+hr {
+	border-top: 2px solid #18cae6;
+}
+.popup-menu li:hover {
+	background-color: #333333;
+}
+.act:before {
+	content: "[";
+}
+.act:after {
+	content: "]";
+}
+.email, .email b {
+	color: #b1dff6;
+}
+
+.embed {
+  background-color: #18cae6;
+  color: #080808;
+}
+.modal, .popup-menu, .preview {
+	background-color: #080808;
+	border-top: 2px solid #18cae6;
+	border-left: 2px solid #18cae6;
+	border-right: 2px solid #18cae6;
+	border-bottom: 2px solid #18cae6;
+}
+.popup-menu {
+  top: -9px;
+  left: -11px;
+}
+.omit {
+  color: #0d7080;
+}
+#lock, .scroll-lock header {
+  color: #18cae6;
+	background-image: url('ui/invclock.svg');
+  background-size: 14px 15px;
+	background-position: 0px 0px;
+}
+.themed {
+	color: #b1dff6;
+}
+del {
+	background-color: #0c345b;
+	color: #b1dff6;
+}
+#sync, #options {
+	color: #b1dff6;
+}
+input[type=button] {
+  padding: 4px;
+  background: #080808;
+  color: #18cae6;
+  border: 1px solid #18cae6;
+	font-family: Menlo, Courier, monospace;
+  cursor: pointer;
+}
+.fileInput {
+  display: inline;
+  position: relative;
+  padding: 4px;
+  background: #080808;
+  color: #18cae6;
+  border: 1px solid #18cae6;
+	font-family: Menlo, Courier, monospace;
+  cursor: pointer;
+  margin-left: 0px;
+  margin-right: 130px;
+}
+.postCancel {
+  margin-right: 2px;
+}
+input[type=file] {
+  display: none;
+  position: relative;
+  z-index: 2;
+  background: #080808;
+  color: #18cae6;
+	font-family: Menlo, Courier, monospace;
+  width: 1px;
+  cursor: pointer;
+  opacity: 0;
+}
+
+#name, #email, #lastn {
+  background: #0f0f0f;
+  color: #18cae6;
+	font-family: Menlo, Courier, monospace;
+  padding: 2px;
+  border: 1px solid #18cae6;
+}
+#email, #lastn {
+  margin-top: 2px;
+}
+#lastn {
+  margin-bottom: 2px;
+}
+
+
+@media all and (max-device-width: 600px) {
+  body {
+    background-attachment: scroll;
+  }
+}

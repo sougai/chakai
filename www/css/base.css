@@ -208,19 +208,19 @@ section > figure > a {
 	z-index: 5;
 }
 .hat, .expanded .hat {
-	background: url('ui/hat.png') no-repeat;
+	background: url('ui/fukohat.png') no-repeat;
 	position: absolute;
-	left: 10px;
+	left: 30px;
 	top: -75px;
-	width: 70px;
+	width: 108px;
 	height: 141px;
 }
 article .hat {
-	width: 35px;
-	height: 70px;
+	width: 57px;
+	height: 85px;
 	left: 10px;
-	top: -28px;
-	background-size: 35px 70px;
+	top: -40px;
+	background-size: 57px 85px;
 }
 #lock {
 	background: url('ui/lock.svg') no-repeat left;

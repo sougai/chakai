@@ -122,6 +122,8 @@ var themes = [
   'tea',
   'higan',
   'terminal',
+  'copland',
+  'me',
 	'moe',
 	'gar',
 	'mawaru',
