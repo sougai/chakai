@@ -1,9 +1,6 @@
 (function () {
 
 Backbone.on('afterInsert', function (model) {
-	if (model.id != MILLION)
-		return;
-
 	if (!model.get('op'))
 		gravitas_body();
 });
