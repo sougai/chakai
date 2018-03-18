@@ -585,6 +585,20 @@ web.resource(/^\/outbound\/(g|iqdb)\/([\w+\/]{22}\.jpg)$/,
 	cb(null, 303.1, dest);
 });
 
+web.resource(/^\/outbound\/(sn|iq|io)\/([\d]{13})\.([\w]{3,4})$/,
+      function (req, params, cb) {
+  var src = 'https://' + config.LOGIN_COOKIE_DOMAIN + imager.config.MEDIA_URL + 'src/' + params[2] + '.' + params[3];
+  var service;
+  if (params[1] == 'sn')
+    service = 'http://saucenao.com/search.php?url=';
+  else if (params[1] == 'iq')
+    service = 'http://iqdb.org/?url=';
+  else
+    service = 'http://imgops.com/';
+  var dest = service + encodeURIComponent(src);
+  cb(null, 303.1, dest);
+});
+
 web.resource(/^\/outbound\/hash\/([\w+\/]{22})$/, function (req, params, cb) {
 	var dest = 'http://archive.foolz.us/_/search/image/' + escape(params[1]);
 	cb(null, 303.1, dest);

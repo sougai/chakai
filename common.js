@@ -610,6 +610,14 @@ function new_tab_link(srcEncoded, inside, cls) {
 		' rel="noreferrer nofollow noopener">'), inside, safe('</a>')];
 }
 
+function image_sauce_id(srcEncoded, inside) {
+  return [safe('<a href="/outbound/sn/' + inside + '" target="_blank" rel="nofollow">'),
+         'SN', safe('</a>'), ' ',
+         safe('<a href="/outbound/iq/' + inside + '" target="_blank" rel="nofollow">'),
+         'IQ', safe('</a>'), ' ',
+         safe('<a href="/outbound/io/' + inside + '" target="_blank" rel="nofollow">'),
+         'IO', safe('</a>')];
+}
 
 OS.image_paths = function () {
 	if (!this._imgPaths) {
@@ -629,6 +637,7 @@ var audioIndicator = "\u266B"; // musical note
 OS.gazou = function (info, toppu) {
 	var src, name, caption, video;
   var spoiltgl = (this.spoilToggle == true);
+  var saucetgl = (this.sauceToggle == true);
 	if (info.vint) {
 		src = encodeURI('../outbound/hash/' + info.MD5);
 		var google = encodeURI('../outbound/g/' + info.vint);
@@ -640,7 +649,7 @@ OS.gazou = function (info, toppu) {
 	else {
 		src = encodeURI(this.image_paths().src + info.src);
 		video = info.video || (/\.webm$/i.test(src) && 'webm'); // webm check is legacy
-		caption = [video ? 'Video ' : 'Image ',
+		caption = [video ? 'Video ' : saucetgl ? [image_sauce_id(src, info.src), ' '] : 'Image ',
             new_tab_link(src, (spoiltgl && (info.spoiler || info.realthumb)) ? 'Spoilered Image' : info.src)];
 	}
 

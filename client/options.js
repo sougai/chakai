@@ -39,6 +39,7 @@ optSpecs.push(option_thumbs);
 optSpecs.push(option_autocomplete);
 optSpecs.push(option_backlinks);
 optSpecs.push(option_spoiler_toggle);
+optSpecs.push(option_sauce_toggle);
 optSpecs.push(option_theme);
 optSpecs.push(option_last_n);
 
@@ -263,6 +264,15 @@ function option_spoiler_toggle(spoiltgl) {
 option_spoiler_toggle.id = 'nospoiltgl';
 option_spoiler_toggle.label = 'Spoilered Images';
 option_spoiler_toggle.type = 'revcheckbox';
+
+/* SAUCE TOGGLE */
+function option_sauce_toggle(saucetgl) {
+  $.cookie('sauce_toggle', saucetgl);
+  oneeSama.sauceToggle = saucetgl;
+}
+option_sauce_toggle.id = 'saucetgl';
+option_sauce_toggle.label = 'Image Search';
+option_sauce_toggle.type = 'checkbox';
 
 /* INLINE EXPANSION */
 

@@ -31,6 +31,9 @@ exports.write_thread_html = function (reader, req, out, opts) {
   if (cookies.spoiler_toggle == 'true')
     oneeSama.spoilToggle = (cookies.spoiler_toggle == 'true');
 
+  if (cookies.sauce_toggle == 'true')
+    oneeSama.sauceToggle = (cookies.sauce_toggle == 'true');
+
 	var lastN = cookies.lastn && parseInt(cookies.lastn, 10);
 	if (!lastN || !common.reasonable_last_n(lastN))
 		lastN = config.THREAD_LAST_N;
