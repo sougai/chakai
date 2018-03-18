@@ -32,14 +32,13 @@ function parent_model($el) {
 (function () {
 
 /* OPTIONS LIST */
+optSpecs.push(option_backlinks);
+optSpecs.push(option_sauce_toggle);
+optSpecs.push(option_spoiler_toggle);
+optSpecs.push(option_thumbs);
 optSpecs.push(option_inline_expansion);
 if (window.devicePixelRatio > 1)
 	optSpecs.push(option_high_res);
-optSpecs.push(option_thumbs);
-optSpecs.push(option_autocomplete);
-optSpecs.push(option_backlinks);
-optSpecs.push(option_spoiler_toggle);
-optSpecs.push(option_sauce_toggle);
 optSpecs.push(option_theme);
 optSpecs.push(option_last_n);
 
@@ -194,16 +193,6 @@ function reveal_thumbnail(event) {
 	});
 	return false;
 }
-
-/* AUTOCOMPLETE */
-
-function option_autocomplete(b) {
-	if (postForm)
-		postForm.model.set('autocomplete', b);
-}
-option_autocomplete.id = 'autocomplete';
-option_autocomplete.label = 'Auto-complete';
-option_autocomplete.type = 'checkbox';
 
 /* BACKLINKS */
 
@@ -475,6 +464,7 @@ function contract_full_width($post) {
 var shortcuts = [
 	{label: 'New post', name: 'new', which: 78},
 	{label: 'Image spoiler', name: 'togglespoiler', which: 73},
+	{label: 'Text spoiler', name: 'textspoiler', which: 87},
 	{label: 'Finish post', name: 'done', which: 83},
 ];
 
