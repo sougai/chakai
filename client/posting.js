@@ -530,6 +530,9 @@ on_input: function (val) {
 		// try to not break apart ##bigtext marker
 		if (len < 6 && /^＃＃/.test(val))
 			lim = 0;
+		// try to not break apart ##asciitext marker
+    else if (len < 6 && /^｀｀/.test(val))
+			lim = 0;
 		else if (len > 3)
 			lim = len - 3;
 

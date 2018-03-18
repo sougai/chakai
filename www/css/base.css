@@ -90,8 +90,15 @@ h3 {
 	font-size: inherit;
 }
 h4 {
-	font-size: 200%;
+	font-size: 120%;
 	font-weight: normal;
+	margin: 0;
+	padding: 0;
+}
+h5 {
+	font-size: 100%;
+	font-weight: normal;
+  font-family: "Courier New", Courier, monospace;
 	margin: 0;
 	padding: 0;
 }
