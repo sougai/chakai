@@ -2,7 +2,7 @@
 
 var BOARD = document.location.pathname.match(/\/(\w+)\/$/)[1];
 
-var $title = $('<h2/>', {text: '/' + BOARD + '/ is out of season.'});
+var $title = $('<h2/>', {text: '/' + BOARD + '/ is closed'});
 var $when = $('<span/>');
 var $remain = $('<p>', {text: 'Open in '}).append($when).append('.');
 var countdownInterval, ticks = 0;
@@ -11,7 +11,7 @@ function countdown() {
 	var now = new Date();
 	var diff = Math.floor((END - now.getTime()) / 1000);
 	if (diff < 0.5) {
-		$remain.text('Open season.');
+		$remain.text('/' + BOARD + '/ is now open');
 		clearInterval(countdownInterval);
 		if (ticks > 3)
 			setTimeout(function () {
@@ -41,10 +41,5 @@ else {
 }
 
 $('div').append($title, $remain);
-
-$('#bgm')[0].addEventListener('ended', function () {
-	this.currentTime = 6.02;
-	this.play();
-}, false);
 
 })();
