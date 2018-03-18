@@ -391,15 +391,6 @@ pre, .themed {
 	}
 }
 
-article, article header {
-	transition: background-color 1.5s, border-color 1.5s, color 1.5s;
-	-webkit-transition: background-color 1.5s, border-color 1.5s, color 1.5s;
-}
-#trans {
-	transition: color 1.5s;
-	-webkit-transition: color 1.5s;
-}
-
 @media screen and (max-device-width: 480px) and (orientation: portrait) {
 	section > blockquote, section > header, section > #banner, section > .omit {
 		margin-left: 0.5em;
@@ -411,18 +402,6 @@ article, article header {
 	.full figcaption i {
 		display: block;
 	}
-}
-
-section.full.floop article { float: left; clear: both; }
-section.full.floop article.floop { float: right; clear: right; }
-section.full.floop article.mine { margin-bottom: 1em; }
-section.full.floop article.mine,
-section.full.floop aside { clear: both; }
-section.floop > header > nav:after,
-section.floop > header > a.nope:after { content: " [Dual]"; font-weight: bold; }
-@media screen and (min-width: 900px) {
-	section.full.floop article.floop { max-width: 50%; min-width: 40%; }
-	section.full.floop article.floop.expanded { max-width: inherit; min-width: inherit; }
 }
 
 blockquote.twitter-tweet {
