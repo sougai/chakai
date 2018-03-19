@@ -316,7 +316,7 @@ function load_OPs(callback) {
 				op = parse_number(op);
 				var ps = [scan_thread.bind(null,tagIndex,op)];
 				if (!config.READ_ONLY && config.THREAD_EXPIRY
-							&& tag != 'archive') {
+							&& tag != 'archive' && tag != 'reien') {
 					ps.push(refresh_expiry.bind(null,
 							tag, op));
 				}
@@ -910,6 +910,92 @@ Y.archive_thread = function (op, callback) {
 	}], callback);
 };
 
+Y.archive_thread_curfew = function (op, callback) {
+	var r = this.connect();
+	var key = 'thread:' + op, archiveKey = 'tag:' + tag_key('reien');
+	var self = this;
+	async.waterfall([
+	function (next) {
+		var m = r.multi();
+		m.exists(key);
+		m.hget(key, 'immortal');
+		m.zscore('tag:' + tag_key('graveyard') + ':threads', op);
+		m.exec(next);
+	},
+	function (rs, next) {
+		if (!rs[0])
+			return callback(Muggle(key + ' does not exist.'));
+		if (parse_number(rs[1]))
+			return callback(Muggle(key + ' is immortal.'));
+		if (rs[2])
+			return callback(Muggle(key + ' is already deleted.'));
+		var m = r.multi();
+		// order counts
+		m.hgetall(key);
+		m.hgetall(key + ':links');
+		m.llen(key + ':posts');
+		m.smembers(key + ':privs');
+		m.lrange(key + ':dels', 0, -1);
+		m.exec(next);
+	},
+	function (rs, next) {
+		var view = rs[0], links = rs[1], replyCount = rs[2],
+				privs = rs[3], dels = rs[4];
+		var subject = subject_val(op, view.subject);
+		var tags = view.tags;
+		var m = r.multi();
+		// move to archive tag only
+		m.hset(key, 'origTags', tags);
+		m.hset(key, 'tags', tag_key('reien'));
+		tags = parse_tags(tags);
+		tags.forEach(function (tag) {
+			var tagKey = 'tag:' + tag_key(tag);
+			m.zrem(tagKey + ':threads', op);
+			if (subject)
+				m.zrem(tagKey + ':subjects', subject);
+		});
+		m.zadd(archiveKey + ':threads', op, op);
+		self._log(m, op, common.DELETE_THREAD, [], {tags: tags});
+
+		// shallow thread insertion message in archive
+		if (!_.isEmpty(links))
+			view.links = links;
+		extract(view);
+		delete view.ip;
+		view.replyctr = replyCount;
+		view.hctr = 0;
+		var etc = {tags: ['reien'], cacheUpdate: {}};
+		self._log(m, op, common.MOVE_THREAD, [view], etc);
+
+		// clear history; note new history could be added
+		// for deletion in the archive
+		// (a bit silly right after adding a new entry)
+		m.hdel(key, 'hctr');
+		m.del(key + ':history');
+		m.del(key + ':ips');
+
+		// delete hidden posts
+		dels.forEach(function (num) {
+			m.del('post:' + num);
+			m.del('post:' + num + ':links');
+		});
+		m.del(key + ':dels');
+
+		if (privs.length) {
+			m.del(key + ':privs');
+			privs.forEach(function (priv) {
+				m.del(key + ':privs:' + priv);
+			});
+		}
+
+		m.exec(next);
+	},
+	function (results, done) {
+		set_OP_tag(config.BOARDS.indexOf('reien'), op);
+		done();
+	}], callback);
+};
+
 /* BOILERPLATE CITY */
 
 Y.remove_images = function (nums, callback) {
@@ -1324,7 +1410,7 @@ Y.get_tag = function (page) {
 	var r = this.connect();
 	var self = this;
 	var key = 'tag:' + tag_key(this.tag) + ':threads';
-	var reverseOrder = this.tag == 'archive';
+	var reverseOrder = (this.tag == 'archive' || this.tag == 'reien');
 	if (page < 0 && !reverseOrder)
 		page = 0;
 	var start = page * config.THREADS_PER_PAGE;

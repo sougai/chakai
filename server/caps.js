@@ -13,6 +13,8 @@ function can_access_board(ident, board) {
 		return true;
 	if (board == 'archive' && !can_administrate(ident))
 		return false;
+	if (board == 'reien' && !can_administrate(ident))
+		return false;
 	if (board == config.STAFF_BOARD && !can_moderate(ident))
 		return false;
 	if (ident.ban || ident.suspension)

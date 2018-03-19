@@ -16,9 +16,9 @@ var config = {
 	CLOUDFLARE: false,
 	RESTRICTED_COUNTRIES: ['T1'], /* cloudflare only; T1 = Tor */
 
-	BOARDS: ['moe', 'gar', 'tea', 'meta', 'archive', 'staff'],
+	BOARDS: ['moe', 'gar', 'tea', 'meta', 'archive', 'reien', 'staff'],
 	DEFAULT_BOARD: 'moe',
-	GAME_BOARDS: ['moe', 'archive'],
+	GAME_BOARDS: ['moe', 'archive', 'reien'],
 	STAFF_BOARD: 'staff',
 	THREADS_PER_PAGE: 10,
 	ABBREVIATED_REPLIES: 5,

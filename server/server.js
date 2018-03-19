@@ -356,7 +356,7 @@ function (req, resp) {
 	yaku.get_tag(-1);
 	var paginationHtml;
 	yaku.once('begin', function (thread_count) {
-		var nav = page_nav(thread_count, -1, board == 'archive');
+		var nav = page_nav(thread_count, -1, (board == 'archive' || board == 'reien'));
 		var initScript = make_init_script(req.ident);
 		render.write_board_head(resp, initScript, board, nav);
 		paginationHtml = render.make_pagination_html(nav);
@@ -410,7 +410,7 @@ function (req, resp) {
 		return render_suspension(req, resp);
 
 	var board = this.board;
-	var nav = page_nav(this.threadCount, this.page, board == 'archive');
+	var nav = page_nav(this.threadCount, this.page, (board == 'archive' || board == 'reien'));
 	resp = write_gzip_head(req, resp, web.noCacheHeaders);
 	var initScript = make_init_script(req.ident);
 	render.write_board_head(resp, initScript, board, nav);
@@ -839,7 +839,7 @@ dispatcher[common.INSERT_POST] = function (msg, client) {
 function inactive_board_check(client) {
 	if (caps.can_administrate(client.ident))
 		return true;
-	return ['graveyard', 'archive'].indexOf(client.board) == -1;
+	return ['graveyard', 'archive', 'reien'].indexOf(client.board) == -1;
 }
 
 function allocate_post(msg, client, callback) {
