@@ -178,7 +178,7 @@ function make_thread_meta(board, num, abbrev) {
 }
 
 exports.make_pagination_html = function (info) {
-  if (!info.next_page)
+  if (!info.next_page && !info.prev_page)
     return '';
 	var bits = ['<nav class="pagination">'], cur = info.cur_page;
 	if (cur >= 0)
