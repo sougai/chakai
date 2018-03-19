@@ -3,6 +3,7 @@
  */
 
 var _ = require('../lib/underscore'),
+    config = require('../config'),
     caps = require('../server/caps'),
     db = require('../db'),
     expat = require('node-expat'),
@@ -10,9 +11,9 @@ var _ = require('../lib/underscore'),
     winston = require('winston');
 
 var RADIO_IDENT = {auth: 'Radio', ip: '127.0.0.1'};
-var RADIO_MOUNT = '/radio';
+var RADIO_MOUNT = '/radio.ogg';
 var ICECAST_POLL_URL = 'http://localhost:5555/poll.xsl';
-var M3U_URL = 'http://doushio.com/radio.m3u';
+var M3U_URL = 'https://' + config.LOGIN_COOKIE_DOMAIN + '/radio.m3u';
 var SHORT_INTERVAL = 3 * 1000;
 var LONG_INTERVAL = 30 * 1000;
 
