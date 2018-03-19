@@ -262,6 +262,13 @@ web.resource(/^\/tea\/way(\/?)$/, true, function (req, resp) {
     resp.end();
 });
 
+/* manual page */
+web.resource(/^\/manual(\/?)$/, true, function (req, resp) {
+    resp.writeHead(200, web.noCacheHeaders);
+    resp.write(RES.manualHtml);
+    resp.end();
+});
+
 /* radio */
 web.resource(/^\/radio(\/?)$/, true, function (req, resp) {
     resp.writeHead(302, {

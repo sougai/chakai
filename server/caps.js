@@ -9,6 +9,8 @@ var async = require('async'),
 var RANGES = require('./state').dbCache.ranges;
 
 function can_access_board(ident, board) {
+  if (config.BOARDS_CLOSED && !can_administrate(ident))
+    return false;
 	if (board == 'graveyard' && can_administrate(ident))
 		return true;
 	if (board == 'archive' && !can_administrate(ident))

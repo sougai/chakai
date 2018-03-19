@@ -18,13 +18,20 @@ this.hot = {
 		graveyard: 'mawaru',
 		staff: 'moe',
 	},
+  /* Header links */
+  TOPLINK: {
+    tea: '[ <a href="/" target="_top">Home</a> ] [ <a href="/tea/way/" target="_top">Way</a> ]',
+    magic: '[ <a href="/manual/" target="_top">Manual</a> ]',
+  },
 
 	/* Bump this version whenever you change base.css */
-	BASE_CSS_VERSION: 52,
+	BASE_CSS_VERSION: 55,
 	/* Bump this version whenever you modify any existing theme CSS */
-	THEME_CSS_VERSION: 12,
+	THEME_CSS_VERSION: 13,
 
 	INTER_BOARD_NAVIGATION: true,
+
+  CURFEW_LIFTED: true,
 
 	SPECIAL_TRIPCODES: {
 		kyubey: "／人◕ ‿‿ ◕人＼",

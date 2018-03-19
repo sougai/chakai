@@ -136,6 +136,7 @@ function read_templates(cb) {
 		notFound: read('www', '404.html'),
 		serverError: read('www', '50x.html'),
     teaway: read('tmpl', 'teaway.html'),
+    manual: read('tmpl', 'manual.html'),
 	}, cb);
 }
 
@@ -158,6 +159,7 @@ function expand_templates(res) {
 		notFoundHtml: res.notFound,
 		serverErrorHtml: res.serverError,
     teawayHtml: res.teaway,
+    manualHtml: res.manual,
 	};
 
 	var index = tmpl(res.index);

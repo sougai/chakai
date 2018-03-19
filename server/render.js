@@ -113,6 +113,7 @@ function make_link_rels(board, bits) {
 exports.write_board_head = function (out, initScript, board, nav) {
 	var indexTmpl = RES.indexTmpl;
 	var title = STATE.hot.TITLES[board] || escape(board);
+	var toplink = STATE.hot.TOPLINK[board] || '';
 	var metaDesc = "Real-time imageboard";
 
 	var i = 0;
@@ -127,6 +128,8 @@ exports.write_board_head = function (out, initScript, board, nav) {
 	if (RES.navigationHtml)
 		out.write(RES.navigationHtml);
 	out.write(indexTmpl[i++]);
+  out.write(toplink);
+	out.write(indexTmpl[i++]);
 	out.write(title);
 	out.write(indexTmpl[i++]);
 };
@@ -134,6 +137,7 @@ exports.write_board_head = function (out, initScript, board, nav) {
 exports.write_thread_head = function (out, initScript, board, op, opts) {
 	var indexTmpl = RES.indexTmpl;
 	var title = '/'+escape(board)+'/ - ';
+	var toplink = STATE.hot.TOPLINK[board] || '';
 	if (opts.subject)
 		title += escape(opts.subject) + ' (#' + op + ')';
 	else
@@ -151,6 +155,8 @@ exports.write_thread_head = function (out, initScript, board, op, opts) {
 	out.write(indexTmpl[i++]);
 	if (RES.navigationHtml)
 		out.write(RES.navigationHtml);
+	out.write(indexTmpl[i++]);
+  out.write(toplink);
 	out.write(indexTmpl[i++]);
 	out.write('Thread #' + op);
 	out.write(indexTmpl[i++]);

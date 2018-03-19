@@ -122,13 +122,13 @@ header code {
 	font-family: inherit;
 	font-weight: normal;
 }
-.teaway {
+.toplink {
   font-size: 9pt;
   position: absolute;
   right: 1em;
   top: 3px;
 }
-.teaway a {
+.toplink a {
   text-decoration: none;
 }
 hr {

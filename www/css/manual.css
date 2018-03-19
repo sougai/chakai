@@ -1,0 +1,72 @@
+body {
+  background-color: #080808;
+  color: #b98000;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12pt;
+  margin: 0px;
+}
+
+h1 {
+  color: #00cc00;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 28px;
+  text-shadow: #006600 1px 1px 0px;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+h2 {
+  color: #00cc00;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 16px;
+  letter-spacing: 1px;
+  margin-top: 0px;
+  margin-bottom: 5px;
+}
+
+div.outer {
+  background-color: #080808;
+  position: absolute;
+  left: 50%;
+  margin-left: -255px;
+  width: 510px;
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+}
+
+div.step {
+  background-color: #080808;
+  border-top: 2px solid #00aa00;
+  border-left: 2px solid #00aa00;
+  border-right: 2px solid #00aa00;
+  border-bottom: 2px solid #00aa00;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  padding-left: 8px;
+  margin-top: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+  clear: both;
+}
+
+ol {
+  margin: 0px;
+}
+.step img {
+  margin-top: 4px;
+  margin-left: 8px;
+}
+
+span.extra {
+  display: inline-block;
+  padding-right: 10px;
+  float: right;
+}
+div.magic {
+  color: #00cc00;
+  font-family: "Courier New", Courier, monospace;
+  text-align: center;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
