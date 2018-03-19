@@ -135,6 +135,7 @@ function read_templates(cb) {
 		suspension: read('tmpl', 'suspension.html'),
 		notFound: read('www', '404.html'),
 		serverError: read('www', '50x.html'),
+    rules: read('www', 'rules.html'),
 	}, cb);
 }
 
@@ -156,6 +157,7 @@ function expand_templates(res) {
 		suspensionTmpl: tmpl(res.suspension).tmpl,
 		notFoundHtml: res.notFound,
 		serverErrorHtml: res.serverError,
+    rulesHtml: res.rules,
 	};
 
 	var index = tmpl(res.index);

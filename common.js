@@ -202,7 +202,7 @@ var OS = OneeSama.prototype;
 
 var break_re = new RegExp("(\\S{" + DEFINES.WORD_LENGTH_LIMIT + "})");
 /* internal refs, embeds */
-var ref_re = />>(\d+|>\/watch\?v=[\w-]{11}(?:#t=[\dhms]{1,9})?|>\/soundcloud\/[\w-]{1,40}\/[\w-]{1,80}|>\/@\w{1,15}\/\d{4,20}(?:\?s=\d+)?|>\/a\/\d{0,10})/;
+var ref_re = />>(\d+|>\/watch\?v=[\w-]{11}(?:#t=[\dhms]{1,9})?|>\/soundcloud\/[\w-]{1,40}\/[\w-]{1,80}|>\/@\w{1,15}\/\d{4,20}(?:\?s=\d+)?|>\/(?:a|jp|ai|magic|moe|tano)\/\d{0,10}|>\/(?:arbor|way)\/)/;
 
 OS.hook = function (name, func) {
 	var hs = this.hooks[name];
@@ -231,10 +231,16 @@ function override(obj, orig, upgrade) {
 /// converts one >>ref to html
 OS.red_string = function (ref) {
 	var prefix = ref.slice(0, 3);
+  var prefix_collide = ref.slice(0, 5);
 	var dest, linkClass;
 	if (prefix == '>/w') {
-		dest = 'https://www.youtube.com/' + ref.slice(2);
-		linkClass = 'embed watch';
+    if (prefix_collide == '>/way') {
+		  dest = '../outbound/way/';
+    }
+    else {
+		  dest = 'https://www.youtube.com/' + ref.slice(2);
+		  linkClass = 'embed watch';
+    }
 	}
 	else if (prefix == '>/s') {
 		dest = 'https://soundcloud.com/' + ref.slice(13);
@@ -246,9 +252,36 @@ OS.red_string = function (ref) {
 		linkClass = 'embed tweet';
 	}
 	else if (prefix == '>/a') {
-		var num = parseInt(ref.slice(4), 10);
-		dest = '../outbound/a/' + (num ? ''+num : '');
+    if (prefix_collide == '>/arb') {
+		  dest = '../outbound/arbor/';
+    }
+    else if (prefix_collide == '>/ai/') {
+		  var num = parseInt(ref.slice(5), 10);
+		  dest = '../outbound/ai/' + (num ? ''+num : '');
+    }
+    else {
+		  var num = parseInt(ref.slice(4), 10);
+		  dest = '../outbound/a/' + (num ? ''+num : '');
+    }
 	}
+  else if (prefix == '>/j') {
+		var num = parseInt(ref.slice(5), 10);
+		dest = '../outbound/jp/' + (num ? ''+num : '');
+  }
+  else if (prefix == '>/m') {
+    if (prefix_collide == '>/mag') {
+		  var num = parseInt(ref.slice(8), 10);
+		  dest = '../outbound/magic/' + (num ? ''+num : '');
+    }
+    else {
+		  var num = parseInt(ref.slice(8), 10);
+		  dest = '../outbound/moe/' + (num ? ''+num : '');
+    }
+  }
+  else if (prefix == '>/t') {
+		var num = parseInt(ref.slice(7), 10);
+		dest = '../outbound/tano/' + (num ? ''+num : '');
+  }
 	else {
 		this.tamashii(parseInt(ref, 10));
 		return;

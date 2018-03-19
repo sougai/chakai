@@ -122,6 +122,15 @@ header code {
 	font-family: inherit;
 	font-weight: normal;
 }
+.teaway {
+  font-size: 9pt;
+  position: absolute;
+  right: 1em;
+  top: 3px;
+}
+.teaway a {
+  text-decoration: none;
+}
 hr {
 	border: none;
 	clear: both;

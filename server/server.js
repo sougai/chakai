@@ -255,6 +255,21 @@ else {
 web.route_get(/^\/logout$/, auth.logout);
 web.route_post(/^\/logout$/, auth.logout);
 
+/* rules page */
+web.resource(/^\/tea\/way(\/?)$/, true, function (req, resp) {
+    resp.writeHead(200, web.noCacheHeaders);
+    resp.write(RES.rulesHtml);
+    resp.end();
+});
+
+/* radio */
+web.resource(/^\/radio(\/?)$/, true, function (req, resp) {
+    resp.writeHead(302, {
+        'Location': '/radio.ogg'
+    });
+    resp.end();
+});
+
 function write_mod_js(resp, ident) {
 	if (!RES.modJs) {
 		resp.writeHead(500);
@@ -610,6 +625,48 @@ web.resource(/^\/outbound\/a\/(\d{0,10})$/, function (req, params, cb) {
 	if (thread)
 		url += 'thread/' + thread;
 	cb(null, 303.1, url);
+});
+
+web.resource(/^\/outbound\/jp\/(\d{0,10})$/, function (req, params, cb) {
+	var thread = parseInt(params[1], 10);
+	var url = 'https://boards.4chan.org/jp/';
+	if (thread)
+		url += 'thread/' + thread;
+	cb(null, 303.1, url);
+});
+
+web.resource(/^\/outbound\/ai\/(\d{0,10})$/, function (req, params, cb) {
+  var dest = 'https://gensou.chakai.org/ai/wakaba.pl?task=searchpost&postnum=';
+  var post = parseInt(params[1], 10);
+  cb(null, 303.1, post ? dest+post : dest);
+});
+
+web.resource(/^\/outbound\/magic\/(\d{0,10})$/, function (req, params, cb) {
+  var dest = 'https://gensou.chakai.org/magic/';
+  var post = parseInt(params[1], 10);
+  cb(null, 303.1, post ? dest+post : dest);
+});
+
+web.resource(/^\/outbound\/moe\/(\d{0,10})$/, function (req, params, cb) {
+  var dest = 'https://doushio.com/moe/';
+  var post = parseInt(params[1], 10);
+  cb(null, 303.1, post ? dest+post : dest);
+});
+
+web.resource(/^\/outbound\/tano\/(\d{0,10})$/, function (req, params, cb) {
+  var dest = 'https://tanoshiine.info/radio/';
+  var post = parseInt(params[1], 10);
+  cb(null, 303.1, post ? dest+post : dest);
+});
+
+web.resource(/^\/outbound\/arbor\/$/, function (req, cb) {
+  var dest = 'https://chakai.org/arbor/';
+  cb(null, 303.1, dest);
+});
+
+web.resource(/^\/outbound\/way\/$/, function (req, cb) {
+  var dest = 'https://chakai.org/tea/way/';
+  cb(null, 303.1, dest);
 });
 
 function make_init_script(ident) {
