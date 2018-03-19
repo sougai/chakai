@@ -1,0 +1,45 @@
+body {
+  background-color: #dcdcdc;
+  font-family: "MS PGothic", "Mona", "Hiragino Kaku Gothic Pro", Helvetica, sans-serif;
+  font-size: 14pt;
+  margin: 0px;
+}
+
+div {
+  min-width: 800px;
+  min-height: 600px;
+  overflow: auto;
+}
+
+h1,h2 {
+  color: #112211;
+  white-space: nowrap;
+  text-align: center;
+  text-shadow: #688e23 0px 2px 0px,
+               #556b2f 1px 4px 6px;
+  cursor: default;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  cursor: default;
+}
+
+.tea {
+  position: absolute;
+  top: 60px;
+  left: 310px;
+}
+
+.toko {
+  position: absolute;
+  top: 190px;
+  left: 110px;
+}
+
+.roji {
+  position: absolute;
+  top: 260px;
+  left: 630px;
+}
