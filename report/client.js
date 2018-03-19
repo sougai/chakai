@@ -234,7 +234,7 @@ menuHandlers.Report = function (post) {
 					status: 'error',
 					error: "Couldn't load reCATPCHA.",
 				});
-		}, 10);
+		}, 500);
 	});
 };
 
