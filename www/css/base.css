@@ -372,6 +372,10 @@ pre, .themed {
 	vertical-align: baseline;
 }
 
+.fileInput {
+  display: none;
+}
+
 @media screen and (max-device-width: 480px) {
 	article {
 		clear: both;

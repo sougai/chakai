@@ -10,7 +10,16 @@ function queue_roll(bit) {
 	info.bit = bit;
 	info.$tag = $(this.callback(safe('<strong>')));
 	this.strong = true;
-	this.callback(info.dice ? readable_dice(bit, info.dice) : bit);
+  if (bit == '#poi') {
+    if (info.dice) {
+      this.callback(safe('<a style="text-decoration:none;" href="javascript:void(0);" onclick="this.nextSibling.play();">#poi</a>'));
+      this.callback(safe('<audio src="/poi/poi' + info.dice[1] + '.mp3"></audio>'));
+    }
+    else
+      this.callback(bit);
+  }
+  else
+	  this.callback(info.dice ? readable_dice(bit, info.dice) : bit);
 	this.strong = false;
 	this.callback(safe('</strong>'));
 }
@@ -31,8 +40,18 @@ oneeSama.hook('insertOwnPost', function (extra) {
 		if (!info)
 			info = rolls[n] = {};
 		info.dice = extra.dice[i];
-		if (info.$tag)
-			info.$tag.text(readable_dice(info.bit, info.dice));
+		if (info.$tag) {
+      if (info.bit == '#poi') {
+        var $poi = $('<a style="text-decoration:none;" href="javascript:void(0);" onclick="this.nextSibling.play();">#poi</a>');
+        var $ppoi = $('<audio src="/poi/poi' + info.dice[1] + '.mp3"></audio>');
+        info.$tag.text('');
+        info.$tag.append($poi);
+        info.$tag.append($ppoi);
+        info.$tag.children[0].text('#poi');
+      }
+      else
+			  info.$tag.text(readable_dice(info.bit, info.dice));
+    }
 	}
 });
 

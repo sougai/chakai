@@ -399,50 +399,59 @@ OS.karada = function (body) {
 	return output;
 }
 
-var dice_re = /(#flip|#8ball|#imfey|#\d{0,2}d\d{1,4}(?:[+-]\d{1,4})?)/i;
+var dice_re = /(#flip|#8ball|#fortune|#magicfish|#9ball|#poi|#awoo|#\d{0,2}d\d{1,4}(?:[+-]\d{1,4})?)/i;
 exports.dice_re = dice_re;
 
 var EIGHT_BALL = [
 	'Yes',
 	'No',
 	'Maybe',
-	'Ara ara',
-	'Why this',
-	'Help',
-	'git gud',
-	'Okay',
-	'My condolences',
-	'Praise be',
-	'EEEEEEH?!',
-	'Try again never',
-	'100%',
-	'Can you repeat the question',
-	'lol',
-	'0.1%',
-	'agreedo',
-	'nope.avi',
-	'Would you kindly?',
+	'Ara ara~',
 ];
 
-var IMFEY = [
-	'wowme2',
-	'u do u',
-	"go get 'em champ",
-	'my child...',
-	'✨',
-	'Kooloo Limpah!',
-	'Invigorating.',
-	'sproink',
-	'elwind!',
+var FORTUNE = [
+  'Great curse − 大凶',
+  'Future curse − 末凶',
+  'Half curse − 半凶',
+  'Small curse − 小凶',
+  'Curse − 凶',
+  'Future small blessing − 末小吉',
+  'Future blessing − 末吉',
+  'Half blessing − 半吉',
+  'Blessing − 吉',
+  'Small blessing − 小吉',
+  'Middle blessing − 中吉',
+  'Great blessing − 大吉',
+];
+
+var MAGICFISH = [
+  'North',
+  'South',
+  'East',
+  'West',
+  'Baron of Hell',
+];
+
+var AWOOFINE = [
+  'DON\'T AWOO : $350 PENALTY',
+  'ＧＯＯＤＢＯＹＥ: NO PENALTY',
 ];
 
 function parse_dice(frag) {
 	if (frag == '#flip')
 		return {n: 1, faces: 2};
-	if (frag == '#imfey')
-		return {n: 1, faces: IMFEY.length};
 	if (frag == '#8ball')
 		return {n: 1, faces: EIGHT_BALL.length};
+	if (frag == '#fortune')
+		return {n: 1, faces: 100};
+	if (frag == '#magicfish')
+		return {n: 1, faces: MAGICFISH.length};
+	if (frag == '#9ball')
+		return {n: 1, faces: 1};
+	if (frag == '#poi')
+		return {n: 1, faces: 8};
+	if (frag == '#awoo')
+		return {n: 1, faces: 50};
 	var m = frag.match(/^#(\d*)d(\d+)([+-]\d+)?$/i);
 	if (!m)
 		return false;
@@ -459,10 +468,36 @@ exports.parse_dice = parse_dice;
 function readable_dice(bit, d) {
 	if (bit == '#flip')
 		return '#flip (' + (d[1] == 2) + ')';
-	if (bit == '#imfey')
-		return '#imfey (' + IMFEY[d[1] - 1] + ')';
 	if (bit == '#8ball')
 		return '#8ball (' + EIGHT_BALL[d[1] - 1] + ')';
+	if (bit == '#fortune') {
+    var f;
+    if (d[1] < 2) { f = 0; } else
+    if (d[1] < 5) { f = 1; } else
+    if (d[1] < 11) { f = 2; } else
+    if (d[1] < 19) { f = 3; } else
+    if (d[1] < 31) { f = 4; } else
+    if (d[1] < 45) { f = 5; } else
+    if (d[1] < 57) { f = 6; } else
+    if (d[1] < 69) { f = 7; } else
+    if (d[1] < 81) { f = 8; } else
+    if (d[1] < 91) { f = 9; } else
+    if (d[1] < 98) { f = 10; }
+    else { f = 11; }
+    return '#fortune (' + FORTUNE[f] + ')';
+  }
+	if (bit == '#magicfish')
+		return '#magicfish (' + MAGICFISH[d[1] - 1] + ')';
+	if (bit == '#9ball')
+		return '#9ball (⑨)';
+	if (bit == '#poi')
+		return '(#poi not working)';
+	if (bit == '#awoo') {
+    var f;
+    if (d[1] < 50) { f = 0; }
+    else { f = 1 }
+    return '#awoo (' + AWOOFINE[f] + ')';
+  }
 	var f = d[0], n = d.length, b = 0;
 	if (d[n-1] && typeof d[n-1] == 'object') {
 		b = d[n-1].bias;
@@ -505,7 +540,12 @@ OS.geimu = function (text) {
 			var d = this.dice.shift();
 			this.callback(safe('<strong>'));
 			this.strong = true; // for client DOM insertion
-			this.callback(readable_dice(bit, d));
+      if (bit == '#poi') {
+        this.callback(safe('<a style="text-decoration:none;" href="javascript:void(0);" onclick="this.nextSibling.play();">#poi</a>'));
+        this.callback(safe('<audio src="/poi/poi' + d[1] + '.mp3"></audio>'));
+      }
+      else
+			  this.callback(readable_dice(bit, d));
 			this.strong = false;
 			this.callback(safe('</strong>'));
 		}
