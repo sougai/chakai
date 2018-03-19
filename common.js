@@ -320,6 +320,10 @@ OS.iku = function (token, to) {
 			state[1]++;
 		}
 	}
+  else if (to & DEFINES.S_ASCII) {
+    // no further tokenization for ascii(art)
+    this.callback(token);
+  }
 	else {
 		this.break_heart(token);
 	}
