@@ -255,10 +255,10 @@ else {
 web.route_get(/^\/logout$/, auth.logout);
 web.route_post(/^\/logout$/, auth.logout);
 
-/* rules page */
+/* teaway page */
 web.resource(/^\/tea\/way(\/?)$/, true, function (req, resp) {
     resp.writeHead(200, web.noCacheHeaders);
-    resp.write(RES.rulesHtml);
+    resp.write(RES.teawayHtml);
     resp.end();
 });
 
@@ -660,12 +660,12 @@ web.resource(/^\/outbound\/tano\/(\d{0,10})$/, function (req, params, cb) {
 });
 
 web.resource(/^\/outbound\/arbor\/$/, function (req, cb) {
-  var dest = 'https://chakai.org/arbor/';
+  var dest = 'https://' + config.LOGIN_COOKIE_DOMAIN + '/arbor/';
   cb(null, 303.1, dest);
 });
 
 web.resource(/^\/outbound\/way\/$/, function (req, cb) {
-  var dest = 'https://chakai.org/tea/way/';
+  var dest = 'https://' + config.LOGIN_COOKIE_DOMAIN + '/tea/way/';
   cb(null, 303.1, dest);
 });
 
