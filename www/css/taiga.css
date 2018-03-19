@@ -1,0 +1,89 @@
+a, blockquote a {
+	color: #56558e;
+}
+a:hover, .email b:hover {
+	color: #90434b;
+}
+a.directfl {
+  text-decoration: none;
+  color: #150e0b;
+}
+article, aside, .pagination {
+	background-color: #cf9f7b;
+	border-right: 1px solid #b3896a;
+	border-bottom: 1px solid #b3896a;
+}
+article.editing {
+	background-color: #fdd888;
+	border-color: #ccae6e;
+}
+article.highlight {
+	background-color: #af7954;
+	border-color: #916446;
+}
+b {
+	color: #6c4452;
+}
+b.admin {
+	color: #c00000;
+}
+b.moderator {
+	color: #800080;
+}
+body {
+  color: #150e0b;
+  background-image: url('taiga.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-attachment: fixed;
+  background-position: right bottom;
+  background-color: #ffbc85;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+}
+pre, .themed {
+  color: #212123;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+}
+em {
+	color: #455f64;
+}
+h1 {
+  color: #5e332c;
+	font: bolder 28px Tahoma;
+	letter-spacing: -2px;
+}
+h2 {
+  color: #5e332c;
+	font: bolder 28px Tahoma;
+}
+h3 {
+	color: #3e4356;
+}
+header nav a {
+	color: #150e0b;
+}
+hr {
+	border-top: 1px solid #8d594c;
+}
+.popup-menu li:hover {
+	background-color: #fff9e5;
+}
+.act:before {
+	content: "[";
+}
+.act:after {
+	content: "]";
+}
+.email, .email b {
+	color: #34345c;
+}
+.modal, .preview, .popup-menu {
+	background-color: #cf9f7b;
+	border-right: 1px solid #b3896a;
+	border-bottom: 1px solid #b3896a;
+}
+.omit {
+	color: #707070;
+}

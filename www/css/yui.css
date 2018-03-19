@@ -1,0 +1,89 @@
+a, blockquote a {
+	color: #005580;
+}
+a:hover, .email b:hover {
+	color: #ee75ab;
+}
+a.directfl {
+  text-decoration: none;
+  color: #1e001a;
+}
+article, aside, .pagination {
+	background-color: #eff0e7;
+	border-right: 1px solid #d8d9d4;
+	border-bottom: 1px solid #d8d9d4;
+}
+article.editing {
+	background-color: #e6cdb1;
+	border-color: #d4bda3;
+}
+article.highlight {
+	background-color: #d6d5d9;
+	border-color: #c4c3d7;
+}
+b {
+	color: #87587a;
+}
+b.admin {
+	color: #c00000;
+}
+b.moderator {
+	color: #800080;
+}
+body {
+  color: #1e001a;
+  background-image: url('yui.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-attachment: fixed;
+  background-position: right bottom;
+  background-color: #fafaed;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+}
+pre, .themed {
+  color: #2d293a;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+}
+em {
+	color: #789922;
+}
+h1 {
+  color: #5f2d61;
+	font: bolder 28px Tahoma;
+	letter-spacing: -2px;
+}
+h2 {
+  color: #5f2d61;
+	font: bolder 28px Tahoma;
+}
+h3 {
+	color: #6b5264;
+}
+header nav a {
+	color: #181412;
+}
+hr {
+	border-top: 1px solid #c0c0c0;
+}
+.popup-menu li:hover {
+	background-color: #fcfbf5;
+}
+.act:before {
+	content: "[";
+}
+.act:after {
+	content: "]";
+}
+.email, .email b {
+	color: #34345c;
+}
+.modal, .preview, .popup-menu {
+	background-color: #eff0e7;
+	border-right: 1px solid #d8d9d4;
+	border-bottom: 1px solid #d8d9d4;
+}
+.omit {
+	color: #707070;
+}

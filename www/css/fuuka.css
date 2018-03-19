@@ -1,0 +1,84 @@
+a, blockquote a {
+	color: #34345c;
+}
+a:hover, .email b:hover {
+	color: #dd0000;
+}
+a.directfl {
+  text-decoration: none;
+  color: #002200;
+}
+article, aside, .pagination {
+  background-color: #d6f0da;
+	border-right: 1px solid #b7d9ba;
+	border-bottom: 1px solid #b7d9ba;
+}
+article.highlight {
+	background-color: #d6bad0;
+	border-color: #ba9dbf;
+}
+article.editing {
+	background-color: #f0e0ba;
+	border-color: #dbd1aa;
+}
+b {
+	color: #117743;
+}
+b.admin {
+	color: #c00000;
+}
+b.moderator {
+	color: #800080;
+}
+body {
+  color: #002200;
+	background-color: #eefff2;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+}
+pre, .themed {
+  color: #163316;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+}
+em {
+	color: #789922;
+}
+h1 {
+  color: #163316;
+	font: bolder 28px Tahoma;
+	letter-spacing: -2px;
+}
+h2 {
+  color: #163316;
+	font: bolder 28px Tahoma;
+}
+h3 {
+	color: #0f0c5d;
+}
+header nav a {
+	color: #002200;
+}
+hr {
+	border-top: 1px solid #b7d9bc;
+}
+.popup-menu li:hover {
+	background-color: #f7fcf8;
+}
+.act:before {
+	content: "[";
+}
+.act:after {
+	content: "]";
+}
+.email, .email b {
+	color: #34345c;
+}
+.modal, .preview, .popup-menu {
+	background-color: #d6f0da;
+	border-right: 1px solid #b7d9ba;
+	border-bottom: 1px solid #b7d9ba;
+}
+.omit {
+	color: #707070;
+}

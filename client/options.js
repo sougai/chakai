@@ -125,11 +125,17 @@ var themes = [
   'copland',
   'me',
 	'moe',
+  'coffee',
+  'yotsuba',
+  'fuuka',
+	'ashita',
+  'homu',
+  'yui',
+  'taiga',
 	'gar',
 	'mawaru',
-	'moon',
-	'ashita',
 	'console',
+	'moon',
 ];
 
 function option_theme(theme) {
