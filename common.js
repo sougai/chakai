@@ -520,7 +520,7 @@ function readable_dice(bit, d) {
 /// 4th tokenization stage; populates dice rolls
 OS.geimu = function (text) {
 	if (!this.dice) {
-		this.kinpira(text);
+		this.itameshi(text);
 		return;
 	}
 
@@ -528,13 +528,13 @@ OS.geimu = function (text) {
 	for (var i = 0; i < bits.length; i++) {
 		var bit = bits[i];
 		if (!(i % 2) || !parse_dice(bit)) {
-			this.kinpira(bit);
+			this.itameshi(bit);
 		}
 		else if (this.queueRoll) {
 			this.queueRoll(bit);
 		}
 		else if (!this.dice[0]) {
-			this.kinpira(bit);
+			this.itameshi(bit);
 		}
 		else {
 			var d = this.dice.shift();
@@ -552,40 +552,10 @@ OS.geimu = function (text) {
 	}
 };
 
-/// 5th tokenization stage; parses ^s
-OS.kinpira = function (text) {
-	if (!/[＾^]/.test(text) || /^([＾^]_|:[＾^])/.test(text)) {
-		this.itameshi(text);
-		return;
-	}
-	var bits = text.split(/[＾^]/);
-	// remove trailing ^s
-	while (bits.length && bits[bits.length-1] == '')
-		bits.pop();
-
-	var soup = safe('<sup>');
-	this.sup_level = 0;
-	for (var i = 0; i < bits.length; i++) {
-		if (bits[i])
-			this.itameshi(bits[i]);
-		if (i + 1 < bits.length && i < 5) {
-			// if there's more text, open a <sup>
-			this.itameshi(soup);
-			this.sup_level++;
-		}
-	}
-	// close all the sups we opened
-	var n = this.sup_level;
-	this.sup_level = 0;
-	soup = safe('</sup>');
-	for (var i = 0; i < n; i++)
-		this.itameshi(soup);
-};
-
-/// 6th tokenization stage; parses individual *italic* *words*
+/// 5th tokenization stage; parses individual _italic_ _words_
 OS.itameshi = function (text) {
 	while (true) {
-		var m = /(^|[ .,;:?!(-])\*([^ *]+)\*($|[ .,;:?!)-])/.exec(text);
+		var m = /(^|[ .,;:?!(-])\_([^ _]+)\_($|[ .,;:?!)-])/.exec(text);
 		if (!m)
 			break;
 		if (m.index > 0) {
@@ -605,7 +575,7 @@ OS.itameshi = function (text) {
 // *Not* recommended. Use at your own risk.
 var LINKIFY = false;
 
-/// optional 7th tokenization stage
+/// optional 6th tokenization stage
 if (LINKIFY) { OS.linkify = function (text) {
 
 	var bits = text.split(/(https?:\/\/[^\s"<>^]*[^\s"<>'.,!?:;^])/);
