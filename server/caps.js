@@ -107,8 +107,12 @@ exports.mod_handler = function (func) {
 
 function parse_ip(ip) {
 	var m = ip.match(/^(\d+)\.(\d+)\.(\d+)\.(\d+)(?:\/(\d+))?$/);
-	if (!m)
-		return false;
+	if (!m) {
+    // IPV6 matches whole ip for now...
+    var info = {full: ip, num: ip}
+    info.ipv6 = true;
+		return info;
+  }
 	// damn you signed int32s!
 	var num = 0;
 	for (var i = 4, shift = 1; i > 0; i--) {
@@ -138,7 +142,9 @@ function parse_ranges(ranges) {
 		else
 			return {ip: parse_ip(o)};
 	});
-	ranges.sort(function (a, b) { return a.ip.num - b.ip.num; });
+  // no need to sort if just using linear search
+  // also it's now a mix of strings and integers
+	//ranges.sort(function (a, b) { return a.ip.num - b.ip.num; });
 	return ranges;
 }
 
@@ -149,9 +155,15 @@ function range_lookup(ranges, num) {
 	var result = null;
 	for (var i = 0; i < ranges.length; i++) {
 		var box = ranges[i].ip;
+    if (box.ipv6) {
+      if (num === box.num)
+        result = ranges[i];
+    }
 		/* sint32 issue here doesn't matter for realistic ranges */
-		if ((box.mask ? (num & box.mask) : num) === box.num)
-			result = ranges[i];
+    else {
+      if ((box.mask ? (num & box.mask) : num) === box.num)
+			  result = ranges[i];
+    }
 		/* don't break out of loop */
 	}
 	return result;

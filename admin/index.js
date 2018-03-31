@@ -14,9 +14,9 @@ function ban(m, mod, ip, key, type) {
 	if (type == 'unban') {
 		// unban from every type of suspension
 		authcommon.suspensionKeys.forEach(function (suffix) {
-			m.srem('hot:' + suffix, key);
+			m.srem('hot:' + suffix, ip);
 		});
-		m.hdel('ip:' + key, 'ban');
+		m.hdel('ip:' + ip, 'ban');
 	}
 	else {
 		// need to validate that this is a valid ban type
@@ -24,11 +24,11 @@ function ban(m, mod, ip, key, type) {
 		if (type != 'timeout')
 			return false;
 
-		m.sadd('hot:' + type + 's', key);
-		m.hset('ip:' + key, 'ban', type);
+		m.sadd('hot:' + type + 's', ip);
+		m.hset('ip:' + ip, 'ban', type);
 	}
 	var now = Date.now();
-	var info = {ip: key, type: type, time: now};
+	var info = {ip: ip, type: type, time: now};
 	if (key !== ip)
 		info.realip = ip;
 	if (mod.ident.email)
