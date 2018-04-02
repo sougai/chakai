@@ -52,7 +52,7 @@ options = new Backbone.Model(options);
 
 nashi.upload = !!$('<input type="file"/>').prop('disabled');
 
-if (window.screen && screen.width <= 480) {
+if (window.screen && screen.width <= 320) {
 	inputMinSize = 50;
 	fullWidthExpansion = true;
 }
