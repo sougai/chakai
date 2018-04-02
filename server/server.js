@@ -676,6 +676,11 @@ web.resource(/^\/outbound\/way\/$/, function (req, cb) {
   cb(null, 303.1, dest);
 });
 
+web.resource(/^\/outbound\/manual\/$/, function (req, cb) {
+  var dest = 'https://' + config.LOGIN_COOKIE_DOMAIN + '/manual/';
+  cb(null, 303.1, dest);
+});
+
 function make_init_script(ident) {
 	var secretKey = STATE.hot.connTokenSecretKey;
 	if (!ident || !secretKey)

@@ -202,7 +202,7 @@ var OS = OneeSama.prototype;
 
 var break_re = new RegExp("(\\S{" + DEFINES.WORD_LENGTH_LIMIT + "})");
 /* internal refs, embeds */
-var ref_re = />>(\d+|>\/watch\?v=[\w-]{11}(?:#t=[\dhms]{1,9})?|>\/soundcloud\/[\w-]{1,40}\/[\w-]{1,80}|>\/@\w{1,15}\/\d{4,20}(?:\?s=\d+)?|>\/(?:a|jp|ai|magic|moe|tano)\/\d{0,10}|>\/(?:arbor|way)\/)/;
+var ref_re = />>(\d+|>\/watch\?v=[\w-]{11}(?:#t=[\dhms]{1,9})?|>\/soundcloud\/[\w-]{1,40}\/[\w-]{1,80}|>\/@\w{1,15}\/\d{4,20}(?:\?s=\d+)?|>\/(?:a|jp|ai|magic|manual|moe|tano)\/\d{0,10}|>\/(?:arbor|way)\/)/;
 
 OS.hook = function (name, func) {
 	var hs = this.hooks[name];
@@ -272,6 +272,10 @@ OS.red_string = function (ref) {
     if (prefix_collide == '>/mag') {
 		  var num = parseInt(ref.slice(8), 10);
 		  dest = '../outbound/magic/' + (num ? ''+num : '');
+    }
+    else if (prefix_collide == '>/man') {
+		  var num = parseInt(ref.slice(8), 10);
+		  dest = '../outbound/manual/' + (num ? ''+num : '');
     }
     else {
 		  var num = parseInt(ref.slice(8), 10);
