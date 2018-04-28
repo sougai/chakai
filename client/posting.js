@@ -679,7 +679,7 @@ upload_status: function (msg) {
 upload_error: function (msg) {
 	if (this.model.get('cancelled'))
 		return;
-	this.model.set({uploadStatus: msg, uploading: false});
+	this.model.set({uploadStatus: '', uploading: false});
 	if (this.uploadForm)
 		this.uploadForm.find('input[name=alloc]').remove();
 },
