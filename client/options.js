@@ -76,6 +76,12 @@ function save_ident() {
 			$.getScript(mediaURL + 'js/login.js');
 			email = false;
 		}
+    else if (email == 'spooki') {
+			$email.val('');
+		  var css = 'spooki.css?v=' + themeVersion;
+		  $('#theme').attr('href', mediaURL + 'css/' + css);
+      email = false;
+	  }
 		else if (is_sage(email) && !is_noko(email))
 			email = false;
 		var id = {};

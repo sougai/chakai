@@ -107,7 +107,7 @@ exports.mod_handler = function (func) {
 
 function parse_ip(ip) {
 	var m = ip.match(/^(\d+)\.(\d+)\.(\d+)\.(\d+)(?:\/(\d+))?$/);
-	if (!m) {
+	if (m == null) {
     // IPV6 matches whole ip for now...
     var info = {full: ip, num: ip}
     info.ipv6 = true;
@@ -155,7 +155,7 @@ function range_lookup(ranges, num) {
 	var result = null;
 	for (var i = 0; i < ranges.length; i++) {
 		var box = ranges[i].ip;
-    if (box.ipv6) {
+    if (num.ipv6) {
       if (num === box.num)
         result = ranges[i];
     }
