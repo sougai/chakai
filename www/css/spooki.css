@@ -1,0 +1,173 @@
+@import url('https://fonts.googleapis.com/css?family=Creepster');
+
+a, blockquote a, figcaption i a {
+	color: #fe9600!important;
+}
+a:hover, .email b:hover {
+	color: #ffee4a!important;
+}
+a.directfl {
+  text-decoration: none;
+  color: #c49756!important;
+}
+article, aside, .pagination {
+	background-color: #171526!important;
+	border-right: 1px solid #11101a!important;
+	border-bottom: 1px solid #11101a!important;
+	border-top: none!important;
+	border-left: none!important;
+}
+article.highlight {
+	background-color: #262340!important;
+	border-color: #262340!important;
+}
+article.editing {
+	background-color: #262340!important;
+	border-color: #262340!important;
+  	color: #c49756!important;
+}
+article.editing a, article.editing blockquote a, article.editing figcaption i a, article.editing b{
+	color: #fe9600!important;
+}
+article.editing time {
+	color: #c49756!important;
+}
+article.editing pre, article.editing .themed {
+  color: #cf8f32!important;
+}
+b {
+	color: #fe9600!important;
+}
+b.admin {
+	color: #b32407!important;
+}
+b.moderator {
+	color: #7800b3!important;
+}
+body {
+	color: #c49756!important;
+	background-color: #03001a!important;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 10pt;
+}
+pre, .themed {
+  color: #cf8f32!important;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 10pt;
+}
+em {
+	color: #634c2c!important;
+}
+h1 {
+	color: #ffee4a!important;
+	font-family: creepster, "MS PGothic", "Mona", "Hiragino Kaku Gothic Pro", Helvetica, sans-serif;
+	font-size: 30px;
+	text-shadow: #8e3523 1px 1px 0px;
+	letter-spacing: 1px;
+}
+h2 {
+	color: #ffee4a!important;
+	font-family: creepster, "MS PGothic", "Mona", "Hiragino Kaku Gothic Pro", Helvetica, sans-serif;
+	text-shadow: #8e3523 1px 1px 0px;
+}
+h3 {
+	color: #ffee4a!important;
+}
+header nav a {
+	color: #fe9600!important;
+}
+hr {
+	border-top: 1px solid #634c2c!important;
+}
+.popup-menu li:hover {
+	background-color: #262340!important;
+}
+.act:before {
+	content: "[";
+}
+.act:after {
+	content: "]";
+}
+.email, .email b {
+	color: #fe9600!important;
+}
+.modal, .preview, .popup-menu {
+	background-color: #171526!important;
+	border-right: 1px solid #11101a!important;
+	border-bottom: 1px solid #11101a!important;
+}
+.omit {
+	color: #73806c!important;
+}
+a {
+  transition-duration: 1s!important;
+  transition-property: color!important;
+}
+figure img {
+  opacity: 0.6;
+}
+figure img:hover {
+  opacity: 1;
+}
+figure img {
+  transition-duration: 1s!important;
+  transition-property: opacity!important;
+}
+
+body {
+  background-image: none;
+}
+article {
+  background-image: none;
+}
+#bannerTop {
+	background-color: #03001a!important;
+}
+#options, #sync {
+	color: #c49756!important;
+}
+input[type=button] {
+  padding: 4px;
+	color: #c49756!important;
+	background-color: #03001a!important;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  border: 1px solid #fe9600;
+  cursor: pointer;
+}
+.fileInput {
+  display: inline;
+  position: relative;
+  padding: 4px;
+	color: #c49756!important;
+	background-color: #03001a!important;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  border: 1px solid #fe9600;
+  cursor: pointer;
+  margin-left: 0px;
+  margin-right: 130px;
+}
+.postCancel {
+  margin-right: 2px;
+}
+input[type=file] {
+  display: none;
+  position: relative;
+  z-index: 2;
+	color: #c49756!important;
+	background-color: #03001a!important;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  width: 1px;
+  cursor: pointer;
+  opacity: 0;
+}
+
+#name, #email, #lastn {
+	color: #c49756!important;
+	background-color: #03001a!important;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Courier New", Courier, monospace;
+  border: 1px solid #fe9600;
+}
+.modal {
+  border-color: #fe9600;
+}
