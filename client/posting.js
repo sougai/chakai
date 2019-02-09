@@ -679,7 +679,7 @@ upload_status: function (msg) {
 upload_error: function (msg) {
 	if (this.model.get('cancelled'))
 		return;
-	this.model.set({uploadStatus: '', uploading: false});
+	this.model.set({uploadStatus: msg, uploading: false});
 	if (this.uploadForm)
 		this.uploadForm.find('input[name=alloc]').remove();
 },
@@ -1000,6 +1000,9 @@ window.addEventListener('message', function (event) {
 	if (msg == 'OK')
 		return;
 	else if (postForm)
+		// sanity check for weird browser responses
+		if (msg.length < 5 || msg.length > 100)
+			msg = 'Unknown event error.';
 		postForm.upload_error(msg);
 }, false);
 
