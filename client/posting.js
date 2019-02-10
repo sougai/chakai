@@ -116,17 +116,6 @@ function handle_shortcut(event) {
 			used = true;
 		}
 		break;
-  case shortcutKeys.textspoiler:
-    if (postForm) {
-      var $input = this.$input;
-      var state = this.imouto.textspoil.spoiler;
-      // Was spoiler already started?
-      var sp = (state?'[/':' [')+'spoiler]';
-      this.imouto.textspoil.spoiler = !state;
-      $input.val($input.val()+sp);
-      used = true;
-    }
-    break;
 	case shortcutKeys.done:
 		if (postForm) {
 			if (!postForm.submit.attr('disabled')) {
@@ -284,7 +273,6 @@ initialize: function (dest) {
 	this.imouto.callback = inject;
 	this.imouto.op = THREAD;
 	this.imouto.state = initial_state();
-  this.imouto.textspoil = {spoiler: 0};
 	this.imouto.buffer = this.buffer;
 	this.imouto.hook('spoilerTag', touchable_spoiler_tag);
 	oneeSama.trigger('imouto', this.imouto);
@@ -424,7 +412,7 @@ on_key_down: function (event) {
 			this.on_input(val);
 		break;
 	default:
-		handle_shortcut.bind(this)(event);
+		handle_shortcut(event);
 	}
 },
 
