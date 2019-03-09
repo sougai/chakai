@@ -116,6 +116,17 @@ function handle_shortcut(event) {
 			used = true;
 		}
 		break;
+  case shortcutKeys.textspoiler:
+    if (postForm) {
+      var $input = this.$input;
+      var state = this.imouto.textspoil.spoiler;
+      // Was spoiler already started?
+      var sp = (state?'[/':' [')+'spoiler]';
+      this.imouto.textspoil.spoiler = !state;
+      $input.val($input.val()+sp);
+      used = true;
+    }
+    break;
 	case shortcutKeys.done:
 		if (postForm) {
 			if (!postForm.submit.attr('disabled')) {
@@ -273,6 +284,7 @@ initialize: function (dest) {
 	this.imouto.callback = inject;
 	this.imouto.op = THREAD;
 	this.imouto.state = initial_state();
+  this.imouto.textspoil = {spoiler: 0};
 	this.imouto.buffer = this.buffer;
 	this.imouto.hook('spoilerTag', touchable_spoiler_tag);
 	oneeSama.trigger('imouto', this.imouto);
@@ -412,7 +424,7 @@ on_key_down: function (event) {
 			this.on_input(val);
 		break;
 	default:
-		handle_shortcut(event);
+		handle_shortcut.bind(this)(event);
 	}
 },
 
@@ -917,8 +929,8 @@ on_image_chosen: function () {
 			if (/legitimate imager response/.test(error))
 				return;
 			// sanity check for weird browser responses
-			if (error.length < 5 || error.length > 100)
-				error = 'Unknown upload error.';
+			// if (error.length < 5 || error.length > 100)
+			error = 'Unknown upload error.';
 			postForm.upload_error(error);
 		}
 		catch (e) {
@@ -989,8 +1001,8 @@ window.addEventListener('message', function (event) {
 		return;
 	else if (postForm)
 		// sanity check for weird browser responses
-		if (msg.length < 5 || msg.length > 100)
-			msg = 'Unknown event error.';
+		//if (msg.length < 5 || msg.length > 100)
+		msg = 'Unknown event error.';
 		postForm.upload_error(msg);
 }, false);
 
