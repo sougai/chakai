@@ -204,12 +204,12 @@ var ajaxJs = 'https://www.google.com/recaptcha/api.js?onload=on_init_captcha&ren
 var CAPTCHA_LOADED = false;
 var CAPTCHA_PENDING_ID = 0;
 window.on_init_captcha = () => {
-  CAPTCHA_LOADED = true;
-  let model = REPORTS[CAPTCHA_PENDING_ID];
-  CAPTCHA_PENDING_ID = 0;
-  if (model) {
-    model.request_new();
-  }
+	CAPTCHA_LOADED = true;
+	let model = REPORTS[CAPTCHA_PENDING_ID];
+	CAPTCHA_PENDING_ID = 0;
+	if (model) {
+		model.request_new();
+	}
 };
 
 menuHandlers.Report = function (post) {
@@ -231,16 +231,17 @@ menuHandlers.Report = function (post) {
 		model.request_new();
 		return;
 	}
-  CAPTCHA_PENDING_ID = num;
+	CAPTCHA_PENDING_ID = num;
 	$.getScript(ajaxJs, () => {
 		// time out if it doesn't call on_init_captcha
 		setTimeout(() => {
-			if (CAPTCHA_PENDING_ID == num)
+			if (CAPTCHA_PENDING_ID == num) {
 				model.set({
 					status: 'error',
 					error: "Couldn't load reCATPCHA.",
 				});
-        CAPTCHA_PENDING_ID = 0;
+				CAPTCHA_PENDING_ID = 0;
+			}
 		}, 5000); // wow, a whole 5 seconds!
 	});
 };
