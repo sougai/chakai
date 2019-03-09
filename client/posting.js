@@ -929,8 +929,8 @@ on_image_chosen: function () {
 			if (/legitimate imager response/.test(error))
 				return;
 			// sanity check for weird browser responses
-			if (error.length < 5 || error.length > 100)
-				error = 'Unknown upload error.';
+			// if (error.length < 5 || error.length > 100)
+			error = 'Unknown upload error.';
 			postForm.upload_error(error);
 		}
 		catch (e) {
@@ -1001,8 +1001,8 @@ window.addEventListener('message', function (event) {
 		return;
 	else if (postForm)
 		// sanity check for weird browser responses
-		if (msg.length < 5 || msg.length > 100)
-			msg = 'Unknown event error.';
+		//if (msg.length < 5 || msg.length > 100)
+		msg = 'Unknown event error.';
 		postForm.upload_error(msg);
 }, false);
 
