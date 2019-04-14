@@ -440,7 +440,7 @@ OS.karada = function (body) {
 	return output;
 }
 
-var dice_re = /(#flip|#8ball|#fortune|#magicfish|#9ball|#poi|#awoo|#\d{0,2}d\d{1,4}(?:[+-]\d{1,4})?)/i;
+var dice_re = /(#flip|#8ball|#fortune|#magicfish|#9ball|#poi|#honk|#awoo|#\d{0,2}d\d{1,4}(?:[+-]\d{1,4})?)/i;
 exports.dice_re = dice_re;
 
 var EIGHT_BALL = [
@@ -491,6 +491,8 @@ function parse_dice(frag) {
 		return {n: 1, faces: 1};
 	if (frag == '#poi')
 		return {n: 1, faces: 8};
+	if (frag == '#honk')
+		return {n: 1, faces: 1};
 	if (frag == '#awoo')
 		return {n: 1, faces: 50};
 	var m = frag.match(/^#(\d*)d(\d+)([+-]\d+)?$/i);
@@ -533,6 +535,8 @@ function readable_dice(bit, d) {
 		return '#9ball (⑨)';
 	if (bit == '#poi')
 		return '(#poi not working)';
+	if (bit == '#honk')
+		return '(#honk not working)';
 	if (bit == '#awoo') {
     var f;
     if (d[1] < 50) { f = 0; }
@@ -584,6 +588,10 @@ OS.geimu = function (text) {
       if (bit == '#poi') {
         this.callback(safe('<a style="text-decoration:none;" href="javascript:void(0);" onclick="this.nextSibling.play();">#poi</a>'));
         this.callback(safe('<audio src="/poi/poi' + d[1] + '.mp3"></audio>'));
+      }
+      else if (bit == '#honk') {
+        this.callback(safe('<a style="text-decoration:none;" href="javascript:void(0);" onclick="this.nextSibling.play();">#honk</a>'));
+        this.callback(safe('<audio src="/soto/honk.ogg"></audio>'));
       }
       else
 			  this.callback(readable_dice(bit, d));

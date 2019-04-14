@@ -18,6 +18,14 @@ function queue_roll(bit) {
     else
       this.callback(bit);
   }
+  else if (bit == '#honk') {
+    if (info.dice) {
+      this.callback(safe('<a style="text-decoration:none;" href="javascript:void(0);" onclick="this.nextSibling.play();">#honk</a>'));
+      this.callback(safe('<audio src="/soto/honk.ogg"></audio>'));
+    }
+    else
+      this.callback(bit);
+  }
   else
 	  this.callback(info.dice ? readable_dice(bit, info.dice) : bit);
 	this.strong = false;
@@ -48,6 +56,14 @@ oneeSama.hook('insertOwnPost', function (extra) {
         info.$tag.append($poi);
         info.$tag.append($ppoi);
         info.$tag.children[0].text('#poi');
+      }
+      else if (info.bit == '#honk') {
+        var $honk = $('<a style="text-decoration:none;" href="javascript:void(0);" onclick="this.nextSibling.play();">#honk</a>');
+        var $hhonk = $('<audio src="/soto/honk.ogg"></audio>');
+        info.$tag.text('');
+        info.$tag.append($honk);
+        info.$tag.append($hhonk);
+        info.$tag.children[0].text('#honk');
       }
       else
 			  info.$tag.text(readable_dice(info.bit, info.dice));
