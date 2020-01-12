@@ -6,6 +6,8 @@ function inject(frag) {
 		dest = dest.children('h4:last');
 	if (this.state[0] & S_ASCII)
 		dest = dest.children('h5:last');
+	if (this.state[0] & S_RED)
+		dest = dest.children('h6:last');
 	if (this.state[0] & S_QUOTE)
 		dest = dest.children('em:last');
 	if (this.strong)
