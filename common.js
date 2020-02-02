@@ -42,6 +42,7 @@ DEFINES.S_QUOTE = 2;
 DEFINES.S_BIG = 4;
 DEFINES.S_ASCII = 8;
 DEFINES.S_RED = 16;
+DEFINES.S_BLUE = 32;
 
 function initial_state() {
 	// state[0] = output mode
@@ -337,6 +338,11 @@ OS.iku = function (token, to) {
 			token = '';
 		this.callback(safe('</h6>'));
 	}
+	if (state[0] & DEFINES.S_BLUE && !(to & DEFINES.S_BLUE)) {
+		if (token && token.safe == '<br>')
+			token = '';
+		this.callback(safe('</h6>'));
+	}
 
 	if (to & DEFINES.S_BIG && !(state[0] & DEFINES.S_BIG)) {
 		this.callback(safe('<h4>'));
@@ -347,8 +353,12 @@ OS.iku = function (token, to) {
 		state[0] |= DEFINES.S_ASCII;
 	}
 	if (to & DEFINES.S_RED && !(state[0] & DEFINES.S_RED)) {
-		this.callback(safe('<h6>'));
+		this.callback(safe('<h6 class="red">'));
 		state[0] |= DEFINES.S_RED;
+	}
+	if (to & DEFINES.S_BLUE && !(state[0] & DEFINES.S_BLUE)) {
+		this.callback(safe('<h6 class="blue">'));
+		state[0] |= DEFINES.S_BLUE;
 	}
 	if (to & DEFINES.S_QUOTE && !(state[0] & DEFINES.S_QUOTE)) {
 		this.callback(safe('<em>'));
@@ -415,10 +425,16 @@ OS.fragment = function (frag) {
 					to |= DEFINES.S_QUOTE;
 				this.iku(line.slice(4), to);
 			}
+			else if (is_bol && !state[1] && /^[?？]{4}[^?？]/.test(line)) {
+				var to = DEFINES.S_BLUE;
+				if (/[>＞]/.test(line[2]))
+					to |= DEFINES.S_QUOTE;
+				this.iku(line.slice(4), to);
+			}
 			else if (is_bol && /^[>＞]/.test(line))
 				this.iku(line, DEFINES.S_QUOTE);
 			else if (line)
-				this.iku(line, state[0] & (DEFINES.S_QUOTE | DEFINES.S_BIG | DEFINES.S_ASCII | DEFINES.S_RED));
+				this.iku(line, state[0] & (DEFINES.S_QUOTE | DEFINES.S_BIG | DEFINES.S_ASCII | DEFINES.S_RED | DEFINES.S_BLUE));
 		}
 	}
 };
@@ -442,6 +458,11 @@ OS.close_out = function () {
   if (this.state[0] & DEFINES.S_RED) {
 		this.callback(safe('</h6>'));
 		this.state[0] -= DEFINES.S_RED;
+	}
+
+  if (this.state[0] & DEFINES.S_BLUE) {
+		this.callback(safe('</h6>'));
+		this.state[0] -= DEFINES.S_BLUE;
 	}
 
 	while (this.state[1] > 0) {

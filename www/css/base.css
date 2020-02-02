@@ -102,10 +102,17 @@ h5 {
 	margin: 0;
 	padding: 0;
 }
-h6 {
+h6.red {
 	font-size: 100%;
 	font-weight: normal;
-  color: red;
+  color: #dc322f;
+	margin: 0;
+	padding: 0;
+}
+h6.blue {
+	font-size: 100%;
+	font-weight: normal;
+  color: #268bd2;
 	margin: 0;
 	padding: 0;
 }
