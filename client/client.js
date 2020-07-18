@@ -465,7 +465,7 @@ $DOC.on('click', 'a', function (event) {
 $DOC.on('click', 'del', function (event) {
 	if (!event.spoilt) {
 		event.spoilt = true;
-		$(event.currentTarget).toggleClass('reveal');
+		$(event.target).toggleClass('reveal');
 	}
 });
 
